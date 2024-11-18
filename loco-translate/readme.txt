@@ -4,7 +4,7 @@ Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 5.2
 Requires PHP: 5.6.20
 Tested up to: 6.7
-Stable tag: 2.6.13
+Stable tag: 2.6.14
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -99,6 +99,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 
 == Changelog ==
+
+= 2.6.14 =
+* Critical fix: A relative path passed to `load_textdomain` no longer throws exception.
 
 = 2.6.13 =
 * Fix for direct calls to load_textdomain with custom paths
@@ -548,7 +551,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.6.13 =
+= 2.6.14 =
 * Various improvements and bug fixes
 
 
