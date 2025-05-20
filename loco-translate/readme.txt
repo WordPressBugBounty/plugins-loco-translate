@@ -3,12 +3,12 @@ Contributors: timwhitlock
 Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 6.6
 Requires PHP: 7.2.24
-Tested up to: 6.7.2
-Stable tag: 2.7.2
+Tested up to: 6.8.1
+Stable tag: 2.7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Translate WordPress plugins and themes directly in your browser
+Translate WordPress plugins and themes directly in your browser. Versatile PO file editor with integrated AI translation providers.
 
 
 == Description ==
@@ -20,11 +20,12 @@ It also provides Gettext/localization tools for developers, such as extracting s
 Features include:
 
 * Built-in translation editor within WordPress admin
-* Integration with translation APIs including DeepL, Google, Microsoft and Lecto AI
+* Integration with translation APIs including DeepL, Google, Lecto, Microsoft and OpenAI.
 * Create and update language files directly in your theme or plugin
 * Extraction of translatable strings from your source code
 * Native MO file compilation without the need for Gettext on your system
-* Support for PO features including comments, references and plural forms
+* JSON (Jed) file compilation compatible with WordPress script localization
+* Support for standard PO features including comments, references and plural forms
 * PO source view with clickable source code references
 * Protected language directory for saving custom translations
 * Configurable PO file backups with diff and restore capability
@@ -85,7 +86,7 @@ If you decide to submit a bug report please post enough [relevant detail](https:
 
 = Is my data protected? =
 
-We don't collect your data or snoop on you. See the [plugin privacy notice](https://localise.biz/wordpress/plugin/privacy).
+We don't collect your data or track you. See the [plugin privacy notice](https://localise.biz/wordpress/plugin/privacy).
 
 
 == Screenshots ==
@@ -100,8 +101,12 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
+= 2.7.3 =
+* PHP 8.4 compatibility
+* Bumped WordPress compatibility to 6.8.1
+
 = 2.7.2 =
-* DeepL client moved to back end due, because CORS 
+* DeepL client moved to back end, because CORS 
 * Rolled in support for OpenAI / ChatGPT translation
 * Workaround for JSON file references with no line number
 * Bumped WordPress compatibility to 6.7.2
@@ -568,7 +573,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.7.2 =
+= 2.7.3 =
 * Various improvements and bug fixes
 
 

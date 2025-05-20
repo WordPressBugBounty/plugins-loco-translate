@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Loco Translate 2.7.2-dev\n"
+"Project-Id-Version: Loco Translate 2.7.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2025-02-14 10:18+0000\n"
+"POT-Creation-Date: 2025-05-20 08:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.7.2-dev; wp-6.7.2\n"
+"X-Loco-Version: 2.7.3; wp-6.8.1; php-8.3.14\n"
 "X-Domain: loco-translate"
 
 #. Author credit: (1) Product name (2) version number, (3) author name.
@@ -275,7 +275,7 @@ msgid ""
 "privacy notice</a>."
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:123 tpl/admin/file/conf.php:58
+#: src/admin/bundle/BaseController.php:102 tpl/admin/file/conf.php:58
 #: tpl/admin/file/move.php:26
 msgid "Advanced"
 msgstr ""
@@ -451,11 +451,11 @@ msgstr ""
 msgid "Compiling MO files"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:66
+#: src/admin/bundle/BaseController.php:54
 msgid "Configuration reset"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:51
+#: src/admin/bundle/BaseController.php:40
 msgid "Configuration saved"
 msgstr ""
 
@@ -465,7 +465,7 @@ msgstr ""
 msgid "Configure %s"
 msgstr ""
 
-#: tpl/admin/config/apis.php:113
+#: tpl/admin/config/apis.php:146
 msgid "Configured externally"
 msgstr ""
 
@@ -536,7 +536,7 @@ msgstr ""
 
 #: src/mvc/AdminRouter.php:77 src/error/Debug.php:19
 #: src/admin/config/DebugController.php:12
-#: src/admin/bundle/BaseController.php:128
+#: src/admin/bundle/BaseController.php:107
 msgid "Debug"
 msgstr ""
 
@@ -583,7 +583,7 @@ msgstr ""
 
 #: src/admin/file/EditController.php:132 src/admin/file/EditController.php:183
 #: src/admin/bundle/LocaleController.php:138 tpl/admin/config/settings.php:234
-#: tpl/admin/config/apis.php:134 tpl/admin/config/prefs.php:45
+#: tpl/admin/config/apis.php:167 tpl/admin/config/prefs.php:45
 #: tpl/admin/common/inc-fsconn.php:16 tpl/admin/common/inc-fsconn.php:41
 #: tpl/admin/errors/no-backups.php:22
 msgid "Documentation"
@@ -681,7 +681,7 @@ msgid "Download"
 msgstr ""
 
 #. Label for the plural form of the original English text
-#: src/Locale.php:402 src/js/Strings.php:93
+#: src/Locale.php:375 src/js/Strings.php:93
 msgctxt "Editor"
 msgid "Plural"
 msgstr ""
@@ -705,7 +705,7 @@ msgid "Save"
 msgstr ""
 
 #. Label for the singular form of the original English text
-#: src/Locale.php:401 src/js/Strings.php:96
+#: src/Locale.php:374 src/js/Strings.php:96
 msgctxt "Editor"
 msgid "Single"
 msgstr ""
@@ -787,7 +787,7 @@ msgstr ""
 msgid "Enter a new location for this file"
 msgstr ""
 
-#: src/js/Strings.php:124 src/error/Exception.php:166
+#: src/js/Strings.php:124 src/error/Exception.php:163
 msgid "Error"
 msgstr ""
 
@@ -807,7 +807,7 @@ msgstr[1] ""
 msgid "Extracting strings"
 msgstr ""
 
-#: src/fs/FileWriter.php:298
+#: src/fs/FileWriter.php:297
 msgid "Failed to build directory path"
 msgstr ""
 
@@ -835,7 +835,7 @@ msgid ""
 "backups"
 msgstr ""
 
-#: src/fs/FileWriter.php:290
+#: src/fs/FileWriter.php:289
 msgid "Failed to create directory"
 msgstr ""
 
@@ -916,7 +916,7 @@ msgctxt "File location"
 msgid "System"
 msgstr ""
 
-#: src/fs/FileWriter.php:309
+#: src/fs/FileWriter.php:308
 msgid "File modification is disallowed by your WordPress config"
 msgstr ""
 
@@ -1049,7 +1049,7 @@ msgstr ""
 msgid "Import config from XML"
 msgstr ""
 
-#: tpl/admin/config/apis.php:124
+#: tpl/admin/config/apis.php:157
 msgid "Important"
 msgstr ""
 
@@ -1092,7 +1092,7 @@ msgstr ""
 msgid "Installed languages"
 msgstr ""
 
-#: src/Locale.php:329
+#: src/Locale.php:306
 msgid "Invalid locale"
 msgstr ""
 
@@ -1264,11 +1264,11 @@ msgstr ""
 msgid "Modification of installed files"
 msgstr ""
 
-#: src/fs/FileWriter.php:314
+#: src/fs/FileWriter.php:313
 msgid "Modification of installed files is disallowed by the plugin settings"
 msgstr ""
 
-#: src/fs/FileWriter.php:325
+#: src/fs/FileWriter.php:324
 msgid ""
 "Modification of POT (template) files is disallowed by the plugin settings"
 msgstr ""
@@ -1317,7 +1317,7 @@ msgstr ""
 msgid "New translations template for \"%s\""
 msgstr ""
 
-#: src/js/Strings.php:17 tpl/admin/config/apis.php:113
+#: src/js/Strings.php:17 tpl/admin/config/apis.php:146
 msgid "No API key"
 msgstr ""
 
@@ -1404,7 +1404,7 @@ msgstr ""
 #: src/admin/config/BaseController.php:39
 #: src/admin/bundle/ViewController.php:25
 #: src/admin/bundle/LocaleController.php:34
-#: src/admin/bundle/BaseController.php:121
+#: src/admin/bundle/BaseController.php:100
 #: src/admin/list/LocalesController.php:24 src/admin/list/BaseController.php:45
 msgid "Overview"
 msgstr ""
@@ -1448,7 +1448,7 @@ msgid "PHP %s"
 msgstr ""
 
 #. %s refers to the handle of a plugin, e.g. "loco-translate/loco.php"
-#: src/package/Plugin.php:232
+#: src/package/Plugin.php:225
 #, php-format
 msgid "Plugin not found: %s"
 msgstr ""
@@ -1465,49 +1465,49 @@ msgstr ""
 msgid "Plugin translations &lsaquo; Loco"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:49 src/admin/Navigation.php:44
+#: src/mvc/AdminRouter.php:49 src/admin/Navigation.php:30
 #: src/admin/bundle/LocaleController.php:154
 msgid "Plugins"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:416
+#: src/Locale.php:389
 msgctxt "Plural category"
 msgid "Few"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:418
+#: src/Locale.php:391
 msgctxt "Plural category"
 msgid "Many"
 msgstr ""
 
 #. Plural category for singular quantity
-#: src/Locale.php:412
+#: src/Locale.php:385
 msgctxt "Plural category"
 msgid "One"
 msgstr ""
 
 #. General plural category not covered by other forms
-#: src/Locale.php:420
+#: src/Locale.php:393
 msgctxt "Plural category"
 msgid "Other"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:414
+#: src/Locale.php:387
 msgctxt "Plural category"
 msgid "Two"
 msgstr ""
 
 #. Plural category for zero quantity
-#: src/Locale.php:410
+#: src/Locale.php:383
 msgctxt "Plural category"
 msgid "Zero"
 msgstr ""
 
 #. Shown when a PO file's Plural-Forms header has a different formula from the Unicode CLDR rules
-#: src/Locale.php:528
+#: src/Locale.php:500
 msgid ""
 "Plural forms differ from Loco Translate's built in rules for this language"
 msgstr ""
@@ -1628,7 +1628,7 @@ msgstr ""
 msgid "Save credentials in session"
 msgstr ""
 
-#: tpl/admin/config/settings.php:233 tpl/admin/config/apis.php:133
+#: tpl/admin/config/settings.php:233 tpl/admin/config/apis.php:166
 #: tpl/admin/config/prefs.php:44
 msgid "Save settings"
 msgstr ""
@@ -1661,7 +1661,7 @@ msgstr ""
 msgid "See all themes"
 msgstr ""
 
-#: tpl/admin/config/apis.php:127
+#: tpl/admin/config/apis.php:160
 msgid "See full disclaimer"
 msgstr ""
 
@@ -1693,7 +1693,7 @@ msgstr ""
 msgid "Settings saved"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:122
+#: src/admin/bundle/BaseController.php:101
 msgid "Setup"
 msgstr ""
 
@@ -1870,7 +1870,7 @@ msgstr ""
 msgid "Theme translations &lsaquo; Loco"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:44 src/admin/Navigation.php:41
+#: src/mvc/AdminRouter.php:44 src/admin/Navigation.php:27
 #: src/admin/bundle/LocaleController.php:149
 msgid "Themes"
 msgstr ""
@@ -1886,7 +1886,7 @@ msgid ""
 "extract strings directly from source code."
 msgstr ""
 
-#: tpl/admin/config/apis.php:126
+#: tpl/admin/config/apis.php:159
 msgid ""
 "Third party services are subject to their own terms of use and may incur "
 "costs from the provider"
@@ -2223,7 +2223,7 @@ msgstr ""
 msgid "WordPress %s"
 msgstr ""
 
-#: src/package/Core.php:87 src/admin/bundle/LocaleController.php:144
+#: src/package/Core.php:85 src/admin/bundle/LocaleController.php:144
 msgid "WordPress Core"
 msgstr ""
 
