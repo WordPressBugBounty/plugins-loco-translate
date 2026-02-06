@@ -30,6 +30,8 @@ abstract class Loco_api_DeepL extends Loco_api_Client {
                 'ZH-SG' => 'ZH-HANS',
                 'ZH-TW' => 'ZH-HANT',
                 'ZH-HK' => 'ZH-HANT',
+                'ZH-MO' => 'ZH-HANT',
+                // TODO ES-419 - Spanish (Latin American)
             ];
             $tag = $targetLang.'-'.strtoupper($locale->region);
             if( array_key_exists($tag,$variants) ){
@@ -73,12 +75,18 @@ abstract class Loco_api_DeepL extends Loco_api_Client {
         else {
             $context = '';
         }
+        
+        // Switch on next-gen (quality_optimized) / classic (latency_optimized) models:
+        // Note that beta languages don't work with the classic model
+        $model = $config['model'] ?? 'prefer_quality_optimized';
 
         // make request and parse JSON result 
         $result = wp_remote_request( self::baseUrl($api_key).'/v2/translate', self::init_request_arguments( $config, [
             'source_lang' => apply_filters('loco_deepl_source_lang',$sourceLang),
             'target_lang' => apply_filters('loco_deepl_target_lang',$targetLang, $locale),
             'formality' => apply_filters('loco_deepl_formality',$formality, $locale),
+            'enable_beta_languages' => apply_filters('loco_deepl_beta', 'latency_optimized' !== $model ),
+            'model' => apply_filters('loco_deepl_model',$model),
             'preserve_formatting' => '1',
             'context' => $context,
             'text' => $sources,
