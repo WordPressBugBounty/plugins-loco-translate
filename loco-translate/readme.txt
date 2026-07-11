@@ -3,8 +3,8 @@ Contributors: timwhitlock
 Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 6.6
 Requires PHP: 7.4
-Tested up to: 7.0
-Stable tag: 2.8.5
+Tested up to: 7.0.1
+Stable tag: 2.8.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,6 +100,12 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 
 
 == Changelog ==
+
+= 2.8.6 =
+* Fixed incorrect Ace editor script reference.
+* Translator role is only created when explicitly granted `loco_admin`.
+* Users with `manage_options` no longer inherit `loco_admin` unless super user.
+* Fix for CVE-2026-15005: Thanks mikemyers.
 
 = 2.8.5 =
 * Added `fs_basedir` setting to restrict writeable locations
@@ -611,7 +617,7 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 
 == Upgrade Notice ==
 
-= 2.8.5 =
+= 2.8.6 =
 * Various improvements and bug fixes
 
 
