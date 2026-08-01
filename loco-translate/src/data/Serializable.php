@@ -196,7 +196,7 @@ abstract class Loco_data_Serializable extends ArrayObject {
         $this->setVersion( $data['v'] );
 
         // timestamp may not be present in old objects
-        $this->t = isset($data['t']) ? $data['t'] : 0;
+        $this->t = $data['t'] ?? 0;
 
         // object is being restored, probably from disk so start with clean state
         $this->dirty = false;
@@ -206,14 +206,14 @@ abstract class Loco_data_Serializable extends ArrayObject {
 
 
     /**
-     * @param string $prop
+     * @param string|null $prop
      * @param mixed $value
      * @param array $defaults
      * @return mixed
      */
-    protected static function cast( $prop, $value, array $defaults ){
-        if( ! array_key_exists($prop,$defaults) ){
-            throw new InvalidArgumentException('Invalid option, '.$prop );
+    protected static function cast( ?string $prop, $value, array $defaults ){
+        if( is_null($prop) || '' === $prop || ! array_key_exists($prop,$defaults) ){
+            throw new InvalidArgumentException('Invalid option, '.var_export($prop,true) );
         }
         $default = $defaults[$prop];
         // cast to same type as default

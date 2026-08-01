@@ -1,6 +1,6 @@
 "use strict";
 
-(function(K, M, B, la) {
+(function(L, M, B, la) {
 const D = function() {
 const w = {};
 return {
@@ -28,41 +28,41 @@ return 1 != e;
 return q;
 }
 w.init = function(q) {
-function t(h, m, p) {
-return (h = g[h]) && h[p] ? h[p] : m || "";
+function t(k, m, p) {
+return (k = g[k]) && k[p] ? k[p] : m || "";
 }
-function e(h) {
-return t(h, h, 0);
+function e(k) {
+return t(k, k, 0);
 }
-function b(h, m) {
-return t(m + "" + h, h, 0);
+function b(k, m) {
+return t(m + "" + k, k, 0);
 }
-function k(h, m, p) {
+function h(k, m, p) {
 p = Number(q(p));
 isNaN(p) && (p = 0);
-return t(h, p ? m : h, p);
+return t(k, p ? m : k, p);
 }
 q = y(q);
 let g = {};
 return {
 __: e,
 _x: b,
-_n: k,
+_n: h,
 _: e,
 x: b,
-n: k,
-load: function(h) {
-g = h || {};
+n: h,
+load: function(k) {
+g = k || {};
 return this;
 },
-pluraleq: function(h) {
-q = y(h);
+pluraleq: function(k) {
+q = y(k);
 return this;
 }
 };
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("2", function(w, r, F) {
 w.ie = function() {
 return !1;
@@ -71,7 +71,7 @@ w.init = function() {
 return w;
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("3", function(w, r, F) {
 Number.prototype.format = function(y, q, t) {
 var e = Math.pow(10, y || 0);
@@ -80,10 +80,10 @@ e = String(Math.round(e * this) / e);
 var b = e.split(".");
 e = b[0];
 b = b[1];
-let k = e.length;
+let h = e.length;
 do {
-y.unshift(e.substring(k - 3, k));
-} while (0 < (k -= 3));
+y.unshift(e.substring(h - 3, h));
+} while (0 < (h -= 3));
 e = y.join(t || ",");
 if (b) {
 {
@@ -112,7 +112,7 @@ y = y.substring(1);
 return y;
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("4", function(w, r, F) {
 Array.prototype.indexOf || (Array.prototype.indexOf = function(y) {
 if (null == this) throw new TypeError();
@@ -125,7 +125,7 @@ for (e = 0 <= e ? e : Math.max(t - Math.abs(e), 0); e < t; e++) if (e in q && q[
 return -1;
 });
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("5", function(w, r, F) {
 F = r.JSON;
 F || (F = {
@@ -135,7 +135,7 @@ stringify: null
 w.parse = F.parse;
 w.stringify = F.stringify;
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("6", function(w, r, F) {
 w.trim = function(y, q) {
 for (q || (q = " \n"); y && -1 !== q.indexOf(y.charAt(0)); ) y = y.substring(1);
@@ -147,14 +147,42 @@ return w.vsprintf(y, [].slice.call(arguments, 1));
 };
 w.vsprintf = function(y, q) {
 let t = 0;
-return y.replace(/%(?:([1-9][0-9]*)\$)?([sud%])/g, function(e, b, k) {
-if ("%" === k) return "%";
+return y.replace(/%(?:([1-9][0-9]*)\$)?([sud%])/g, function(e, b, h) {
+if ("%" === h) return "%";
 e = b ? q[Number(b) - 1] : q[t++];
-return null != e ? String(e) : "s" === k ? "" : "0";
+return null != e ? String(e) : "s" === h ? "" : "0";
 });
 };
+w.html = function() {
+function y(m) {
+return "&" + (g[m] || "#" + m.charCodeAt(0)) + ";";
+}
+function q(m, p) {
+return '<a href="' + m + '" target="' + (p.indexOf(h) ? "_blank" : "_top") + '">' + p + "</a>";
+}
+let t, e, b, h, g, k = function() {
+t = /[<>&"']/g;
+g = {
+"<": "lt",
+">": "gt",
+"&": "amp",
+'"': "quot",
+"'": "apos"
+};
+e = /(\r\n|\n|\r)/g;
+b = /(?:https?):\/\/(\S+)/gi;
+h = location.hostname;
+k = null;
+};
+return function(m, p) {
+k && k();
+m = m.replace(t, y);
+p && (m = m.replace(b, q).replace(e, "<br />"));
+return m;
+};
+}();
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("1a", function(w, r, F) {
 function y(q) {
 return function(t, e) {
@@ -177,7 +205,7 @@ w.rect = function(q) {
 return q.getBoundingClientRect();
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("7", function(w, r, F) {
 function y(c, d, l) {
 function n() {
@@ -264,7 +292,7 @@ c = e(l, d, c).css("opacity", "0").fadeTo(500, 1);
 B(r).triggerHandler("resize");
 return t(c, n);
 }
-function k(c) {
+function h(c) {
 return b(c, v, "warning");
 }
 function g() {
@@ -273,7 +301,7 @@ B("#loco-notices").find("div.notice").each(function(c, d) {
 t(d, c));
 });
 }
-const h = r.console || {
+const k = r.console || {
 log: function() {}
 }, m = Date.now || function() {
 return new Date().getTime();
@@ -282,19 +310,19 @@ let p = [], x, v, f, a;
 w.error = function(c) {
 return b(c, x, "error");
 };
-w.warn = k;
+w.warn = h;
 w.info = function(c) {
 return b(c, f, "info");
 };
 w.success = function(c) {
 return b(c, a, "success", 5e3);
 };
-w.warning = k;
+w.warning = h;
 w.log = function() {
-h.log.apply(h, arguments);
+k.log.apply(k, arguments);
 };
 w.debug = function() {
-(h.debug || h.log).apply(h, arguments);
+(k.debug || k.log).apply(k, arguments);
 };
 w.clear = function() {
 let c = -1;
@@ -320,7 +348,7 @@ setTimeout(g, 1e3);
 return w;
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("8", function(w, r, F) {
 function y(f) {
 let a = B("<pre>" + f + "</pre>").text();
@@ -345,7 +373,7 @@ name: a,
 value: c
 });
 }
-function k(f, a, c) {
+function h(f, a, c) {
 f.append(a, c);
 }
 function g(f, a, c, d) {
@@ -377,7 +405,7 @@ const A = u && u.data, E = u && u.notices, G = E && E.length;
 for (u = -1; ++u < G; ) n.raise(E[u]);
 });
 }
-function h(f) {
+function k(f) {
 B(f).on("heartbeat-send", function(a, c) {
 c["loco-translate"] = {
 nonces: p
@@ -390,7 +418,7 @@ const m = r.ajaxurl || "/wp-admin/admin-ajax.php";
 let p = {}, x, v;
 w.init = function(f) {
 p = f.nonces || p;
-h(F);
+k(F);
 return w;
 };
 w.localise = function(f) {
@@ -439,7 +467,7 @@ data: C
 };
 w.post = function(f, a, c, d) {
 let l = !0, n = a || {}, u = p[f] || t(f);
-r.FormData && n instanceof FormData ? (l = !1, a = k) : a = Array.isArray(n) ? b : e;
+r.FormData && n instanceof FormData ? (l = !1, a = h) : a = Array.isArray(n) ? b : e;
 a(n, "action", "loco_json");
 a(n, "route", f);
 a(n, "loco-nonce", u);
@@ -466,7 +494,7 @@ p[f] = a;
 return w;
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("1b", {
 arab: 1,
 aran: 1,
@@ -551,7 +579,7 @@ return e instanceof y ? e : "string" === typeof e ? w.parse(e) : w.clone(e);
 };
 w.clone = function(e) {
 const b = new y();
-for (const k in e) b[k] = e[k];
+for (const h in e) b[h] = e[h];
 return b;
 };
 w.parse = function(e) {
@@ -580,10 +608,10 @@ return b;
 };
 r.getIcon = function() {
 let e = 3, b = [];
-const k = [ "variant", "region", "lang" ];
+const h = [ "variant", "region", "lang" ];
 for (;0 !== e--; ) {
-const g = k[e], h = this[g];
-h && (b.push(g), b.push(g + "-" + h.toLowerCase()));
+const g = h[e], k = this[g];
+k && (b.push(g), b.push(g + "-" + k.toLowerCase()));
 }
 return b.join(" ");
 };
@@ -592,7 +620,7 @@ return !!q[String(this.lang).toLowerCase()];
 };
 r = null;
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("1c", {
 "á": "a",
 "à": "a",
@@ -1054,15 +1082,15 @@ for (;0 !== l--; ) q(a[l], c, d);
 return c;
 }
 function b() {
-h = "";
+k = "";
 g = [];
 }
-let k = [], g = [], h = "";
+let h = [], g = [], k = "";
 const m = /[^a-z0-9]/g, p = D.require("1c"), x = /\s+/, v = /^[\d\p{L}]+/u, f = /^[^\d\p{L}]+/u;
 return {
 split: t,
 find: function(a, c) {
-const d = [], l = [], n = String(a || "").toLowerCase().replace(m, y).split(" "), u = n.length, C = h && a.substring(0, h.length) === h ? g : k, z = C.length, A = !!c;
+const d = [], l = [], n = String(a || "").toLowerCase().replace(m, y).split(" "), u = n.length, C = k && a.substring(0, k.length) === k ? g : h, z = C.length, A = !!c;
 let E = -1, G = 0;
 a: for (;++E < z; ) {
 const H = C[E], J = H && H.length;
@@ -1076,32 +1104,32 @@ l[E] = H;
 d.push(A ? c[E] : E);
 } else G++;
 }
-h = a;
+k = a;
 g = l;
 return d;
 },
 add: function(a, c) {
-k[a] = t(c);
-h && b();
+h[a] = t(c);
+k && b();
 },
 push: function(a) {
-k[k.length] = e(a);
-h && b();
+h[h.length] = e(a);
+k && b();
 },
 index: function(a, c) {
-k[a] = e(c);
-h && b();
+h[a] = e(c);
+k && b();
 },
 size: function() {
-return k.length;
+return h.length;
 },
 clear: function() {
-k = [];
-h && b();
+h = [];
+k && b();
 },
 remove: function(a) {
-k[a] = null;
-h && b();
+h[a] = null;
+k && b();
 },
 noop: function() {
 b();
@@ -1110,7 +1138,7 @@ return [];
 };
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("b", function(w, r, F) {
 w.listen = function(y, q) {
 function t() {
@@ -1123,28 +1151,28 @@ t();
 return f;
 }
 function b() {
-h = null;
+k = null;
 q(g);
 }
-function k(f) {
+function h(f) {
 let a = p.value;
-a !== g ? (h && clearTimeout(h), e(a), f ? h = setTimeout(b, f) : b()) : h && null == f && (clearTimeout(h), 
+a !== g ? (k && clearTimeout(k), e(a), f ? k = setTimeout(b, f) : b()) : k && null == f && (clearTimeout(k), 
 b());
 }
-let g, h, m = 150;
+let g, k, m = 150;
 const p = y instanceof jQuery ? y[0] : y, x = 1 === Number(p.size), v = B('<a href="#clear" tabindex="-1" class="icon clear"><span>clear</span></a>').on("click", function(f) {
 f.preventDefault();
 p.value = "";
-k();
+h();
 B(p).triggerHandler("blur");
 return !1;
 });
 e(p.value);
 B(p).on("input", function() {
-k(m);
+h(m);
 return !0;
 }).on("blur focus change", function() {
-k(null);
+h(null);
 return !0;
 }).after(v);
 t();
@@ -1154,12 +1182,12 @@ m = f;
 return this;
 },
 ping: function(f) {
-f ? (h && clearTimeout(h), e(p.value), b(), f = void 0) : f = k();
+f ? (k && clearTimeout(k), e(p.value), b(), f = void 0) : f = h();
 return f;
 },
 val: function(f) {
 if (null == f) return g;
-h && clearTimeout(h);
+k && clearTimeout(k);
 p.value = e(f);
 t();
 },
@@ -1170,23 +1198,23 @@ blur: function(f) {
 return B(p).on("blur", f);
 },
 destroy: function() {
-h && clearTimeout(h);
+k && clearTimeout(k);
 }
 };
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("c", function(w, r, F) {
-function y(b, k) {
-return "function" == typeof b ? b.call(k) : b;
+function y(b, h) {
+return "function" == typeof b ? b.call(h) : b;
 }
-function q(b, k) {
+function q(b, h) {
 this.$element = B(b);
-this.options = k;
+this.options = h;
 this.enabled = !0;
 this.fixTitle();
 }
-w.init = function(b, k) {
+w.init = function(b, h) {
 let g = {
 fade: !0,
 offset: 5,
@@ -1195,18 +1223,18 @@ delayOut: e,
 anchor: b.attr("data-anchor"),
 gravity: b.attr("data-gravity") || "s"
 };
-k && (g = B.extend({}, g, k));
+h && (g = B.extend({}, g, h));
 b.tipsy(g);
 };
-w.delays = function(b, k) {
+w.delays = function(b, h) {
 t = b || 150;
-e = k || 100;
+e = h || 100;
 };
 w.kill = function() {
 B("div.tipsy").remove();
 };
-w.text = function(b, k) {
-k.data("tipsy").setTitle(b);
+w.text = function(b, h) {
+h.data("tipsy").setTitle(b);
 };
 let t, e;
 w.delays();
@@ -1226,43 +1254,43 @@ top: 0,
 left: 0
 }).prependTo(F.body);
 b = g[0].offsetWidth;
-const h = g[0].offsetHeight, m = y(this.options.gravity, this.$element[0]);
-var k = this.options.anchor;
-k = k ? this.$element.find(k) : this.$element;
-k = B.extend({}, k.offset(), {
-width: k[0].offsetWidth,
-height: k[0].offsetHeight
+const k = g[0].offsetHeight, m = y(this.options.gravity, this.$element[0]);
+var h = this.options.anchor;
+h = h ? this.$element.find(h) : this.$element;
+h = B.extend({}, h.offset(), {
+width: h[0].offsetWidth,
+height: h[0].offsetHeight
 });
 let p;
 switch (m.charAt(0)) {
 case "n":
 p = {
-top: k.top + k.height + this.options.offset,
-left: k.left + k.width / 2 - b / 2
+top: h.top + h.height + this.options.offset,
+left: h.left + h.width / 2 - b / 2
 };
 break;
 
 case "s":
 p = {
-top: k.top - h - this.options.offset,
-left: k.left + k.width / 2 - b / 2
+top: h.top - k - this.options.offset,
+left: h.left + h.width / 2 - b / 2
 };
 break;
 
 case "e":
 p = {
-top: k.top + k.height / 2 - h / 2,
-left: k.left - b - this.options.offset
+top: h.top + h.height / 2 - k / 2,
+left: h.left - b - this.options.offset
 };
 break;
 
 case "w":
 p = {
-top: k.top + k.height / 2 - h / 2,
-left: k.left + k.width + this.options.offset
+top: h.top + h.height / 2 - k / 2,
+left: h.left + h.width + this.options.offset
 };
 }
-2 === m.length && ("w" === m.charAt(1) ? p.left = k.left + k.width / 2 - 15 : p.left = k.left + k.width / 2 - b + 15);
+2 === m.length && ("w" === m.charAt(1) ? p.left = h.left + h.width / 2 - 15 : p.left = h.left + h.width / 2 - b + 15);
 g.css(p).addClass("tipsy-" + m);
 g.find(".tipsy-arrow")[0].className = "tipsy-arrow tipsy-arrow-" + m.charAt(0);
 this.options.className && g.addClass(y(this.options.className, this.$element[0]));
@@ -1273,20 +1301,20 @@ hide: function() {
 this.tip().remove();
 },
 fixTitle: function() {
-let b = this.$element, k = b.attr("title") || "";
-(k || "string" !== typeof b.attr("original-title")) && b.attr("original-title", k).removeAttr("title");
+let b = this.$element, h = b.attr("title") || "";
+(h || "string" !== typeof b.attr("original-title")) && b.attr("original-title", h).removeAttr("title");
 },
 getTitle: function() {
-let b, k = this.$element, g = this.options;
+let b, h = this.$element, g = this.options;
 this.fixTitle();
-"string" == typeof g.title ? b = k.attr("title" == g.title ? "original-title" : g.title) : "function" == typeof g.title && (b = g.title.call(k[0]));
+"string" == typeof g.title ? b = h.attr("title" == g.title ? "original-title" : g.title) : "function" == typeof g.title && (b = g.title.call(h[0]));
 return (b = ("" + b).replace(/(^\s*|\s*$)/, "")) || g.fallback;
 },
 setTitle: function(b) {
-let k = this.$element;
-k.attr("default-title") || k.attr("default-title", this.getTitle());
-null == b && (b = k.attr("default-title") || this.getTitle());
-k.attr("original-title", b);
+let h = this.$element;
+h.attr("default-title") || h.attr("default-title", this.getTitle());
+null == b && (b = h.attr("default-title") || this.getTitle());
+h.attr("original-title", b);
 if (this.$tip) this.$tip.find(".tipsy-inner")[this.options.html ? "html" : "text"](b);
 },
 tip: function() {
@@ -1309,20 +1337,20 @@ this.enabled = !this.enabled;
 }
 };
 B.fn.tipsy = function(b) {
-function k(m) {
+function h(m) {
 let p = B.data(m, "tipsy");
 p || (p = new q(m, B.fn.tipsy.elementOptions(m, b)), B.data(m, "tipsy", p));
 return p;
 }
 function g() {
-let m = k(this), p = b.delayIn;
+let m = h(this), p = b.delayIn;
 m.hoverState = "in";
 0 == p ? m.show() : (m.fixTitle(), setTimeout(function() {
 "in" == m.hoverState && m.show();
 }, p));
 }
-function h() {
-let m = k(this), p = b.delayOut;
+function k() {
+let m = h(this), p = b.delayOut;
 m.hoverState = "out";
 0 == p ? m.hide() : (m.tip().removeClass("in"), setTimeout(function() {
 "out" == m.hoverState && m.hide();
@@ -1334,11 +1362,11 @@ return !1;
 });
 b = B.extend({}, B.fn.tipsy.defaults, b);
 b.live || this.each(function() {
-k(this);
+h(this);
 });
 if ("manual" != b.trigger) {
 let m = b.live ? "live" : "bind", p = "hover" == b.trigger ? "mouseleave" : "blur";
-this[m]("hover" == b.trigger ? "mouseenter" : "focus", g)[m](p, h);
+this[m]("hover" == b.trigger ? "mouseenter" : "focus", g)[m](p, k);
 }
 return this;
 };
@@ -1357,8 +1385,8 @@ title: "title",
 trigger: "hover",
 anchor: null
 };
-B.fn.tipsy.elementOptions = function(b, k) {
-return B.metadata ? B.extend({}, k, B(b).metadata()) : k;
+B.fn.tipsy.elementOptions = function(b, h) {
+return B.metadata ? B.extend({}, h, B(b).metadata()) : h;
 };
 B.fn.tipsy.autoNS = function() {
 return B(this).offset().top > B(F).scrollTop() + B(r).height() / 2 ? "s" : "n";
@@ -1366,60 +1394,20 @@ return B(this).offset().top > B(F).scrollTop() + B(r).height() / 2 ? "s" : "n";
 B.fn.tipsy.autoWE = function() {
 return B(this).offset().left > B(F).scrollLeft() + B(r).width() / 2 ? "e" : "w";
 };
-B.fn.tipsy.autoBounds = function(b, k) {
+B.fn.tipsy.autoBounds = function(b, h) {
 return function() {
-var g = k[0], h = 1 < k.length ? k[1] : !1;
+var g = h[0], k = 1 < h.length ? h[1] : !1;
 let m = B(F).scrollTop() + b, p = B(F).scrollLeft() + b, x = B(this);
 x.offset().top < m && (g = "n");
-x.offset().left < p && (h = "w");
-B(r).width() + B(F).scrollLeft() - x.offset().left < b && (h = "e");
+x.offset().left < p && (k = "w");
+B(r).width() + B(F).scrollLeft() - x.offset().left < b && (k = "e");
 B(r).height() + B(F).scrollTop() - x.offset().top < b && (g = "s");
-return g + (h ? h : "");
+return g + (k ? k : "");
 };
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("28", function(w, r, F) {
-"".localeCompare || (String.prototype.localeCompare = function() {
-return 0;
-});
-"".trim || (String.prototype.trim = function() {
-return D.require("6").trim(this, " \n\r\t");
-});
-"".padStart || (String.prototype.padStart = function(y, q) {
-let t = this.valueOf();
-for (;y > t.length; ) t = q + t;
-return t;
-});
-"".padEnd || (String.prototype.padEnd = function(y, q) {
-let t = this.valueOf();
-for (;y > t.length; ) t += q;
-return t;
-});
-w.html = function() {
-function y(h) {
-return "&#" + h.charCodeAt(0) + ";";
-}
-function q(h, m) {
-return '<a href="' + h + '" target="' + (m.indexOf(k) ? "_blank" : "_top") + '">' + m + "</a>";
-}
-let t, e, b, k, g = function() {
-t = /[<>&]/g;
-e = /(\r\n|\n|\r)/g;
-b = /(?:https?):\/\/(\S+)/gi;
-k = location.hostname;
-g = null;
-};
-return function(h, m) {
-g && g();
-h = h.replace(t, y);
-m && (h = h.replace(b, q).replace(e, "<br />"));
-return h;
-};
-}();
-return w;
-}({}, K, M));
-D.register("29", function(w, r, F) {
 function y() {}
 let q, t;
 const e = D.require("1b");
@@ -1430,22 +1418,22 @@ w.cast = function(b) {
 return b instanceof y ? b : "string" === typeof b ? w.parse(b) : w.clone(b);
 };
 w.clone = function(b) {
-const k = new y();
-for (const g in b) k[g] = b[g];
-return k;
+const h = new y();
+for (const g in b) h[g] = b[g];
+return h;
 };
 w.parse = function(b) {
 q || (t = /[-_+]/, q = /^([a-z]{2,3})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?(?:-([0-9][a-z0-9]{3,8}|[a-z0-9]{5,8}))?(?:-([a-z]-[-a-z]+))?$/i);
 b = String(b).split(t).join("-");
 b = q.exec(b);
 if (!b) return null;
-const k = new y();
-k.lang = b[1].toLowerCase();
-b[2] && (k.script = b[2].charAt(0).toUpperCase() + b[2].substring(1).toLowerCase());
-b[3] && (k.region = b[3].toUpperCase());
-b[4] && (k.variant = b[4].toLowerCase());
-b[5] && (k.extension = b[5]);
-return k;
+const h = new y();
+h.lang = b[1].toLowerCase();
+b[2] && (h.script = b[2].charAt(0).toUpperCase() + b[2].substring(1).toLowerCase());
+b[3] && (h.region = b[3].toUpperCase());
+b[4] && (h.variant = b[4].toLowerCase());
+b[5] && (h.extension = b[5]);
+return h;
 };
 r = y.prototype;
 r.isValid = function() {
@@ -1453,30 +1441,30 @@ return !!this.lang;
 };
 r.toString = function(b) {
 b = b || "-";
-let k, g = this.lang || "zxx";
-if (k = this.script) g += b + k;
-if (k = this.region) g += b + k;
-if (k = this.variant) g += b + k;
-if (k = this.extension) g += b + k;
+let h, g = this.lang || "zxx";
+if (h = this.script) g += b + h;
+if (h = this.region) g += b + h;
+if (h = this.variant) g += b + h;
+if (h = this.extension) g += b + h;
 return g;
 };
 r.getIcon = function() {
-let b = 4, k = [];
+let b = 4, h = [];
 const g = [ "variant", "region", "script", "lang" ];
 for (;0 !== b--; ) {
-const h = g[b];
-let m = this[h];
-m && (m.join && (m = m.join("-")), 1 === b && 3 === m.length ? k.push("region-m49") : k = k.concat([ h, h + "-" + m.toLowerCase() ]));
+const k = g[b];
+let m = this[k];
+m && (m.join && (m = m.join("-")), 1 === b && 3 === m.length ? h.push("region-m49") : h = h.concat([ k, k + "-" + m.toLowerCase() ]));
 }
-return k.join(" ");
+return h.join(" ");
 };
 r.isRTL = function() {
 return !!e[String(this.script || this.lang).toLowerCase()];
 };
 r = null;
 return w;
-}({}, K, M));
-D.register("2a", function(w, r, F) {
+}({}, L, M));
+D.register("29", function(w, r, F) {
 function y(b) {
 r.console && console.error && console.error(b);
 }
@@ -1489,27 +1477,27 @@ t.prototype.toString = function() {
 return "[Undefined]";
 };
 e.prototype._validate = function(b) {
-let k, g, h = !0;
-for (k in this) g = this[k], g === q ? (y(b + "." + k + "() must be implemented"), 
-h = !1) : g instanceof t && (y(b + "." + k + " must be defined"), h = !1);
-return h;
+let h, g, k = !0;
+for (h in this) g = this[h], g === q ? (y(b + "." + h + "() must be implemented"), 
+k = !1) : g instanceof t && (y(b + "." + h + " must be defined"), k = !1);
+return k;
 };
-w.init = function(b, k) {
+w.init = function(b, h) {
 const g = new e();
 if (b) {
-let h = b.length;
-for (;0 !== h--; ) g[b[h]] = q;
+let k = b.length;
+for (;0 !== k--; ) g[b[k]] = q;
 }
-if (k) for (b = k.length; 0 !== b--; ) g[k[b]] = new t();
+if (h) for (b = h.length; 0 !== b--; ) g[h[b]] = new t();
 return g;
 };
 w.validate = function(b) {
-const k = /function (\w+)\(/.exec(b.toString());
-b.prototype._validate(k && k[1] || "Object");
+const h = /function (\w+)\(/.exec(b.toString());
+b.prototype._validate(h && h[1] || "Object");
 };
 return w;
-}({}, K, M));
-D.register("31", function(w, r, F) {
+}({}, L, M));
+D.register("30", function(w, r, F) {
 let y = 0, q = r.requestAnimationFrame, t = r.cancelAnimationFrame;
 if (!q || !t) for (const b in {
 ms: 1,
@@ -1518,25 +1506,25 @@ webkit: 1,
 o: 1
 }) if (q = r[b + "RequestAnimationFrame"]) if (t = r[b + "CancelAnimationFrame"] || r[b + "CancelRequestAnimationFrame"]) break;
 q && t || (q = function(b) {
-var k = e();
-const g = Math.max(0, 16 - (k - y)), h = k + g;
-k = r.setTimeout(function() {
-b(h);
+var h = e();
+const g = Math.max(0, 16 - (h - y)), k = h + g;
+h = r.setTimeout(function() {
+b(k);
 }, g);
-y = h;
-return k;
+y = k;
+return h;
 }, t = function(b) {
 clearTimeout(b);
 });
 const e = Date.now || function() {
 return new Date().getTime();
 };
-w.loop = function(b, k) {
+w.loop = function(b, h) {
 function g() {
-m = q(g, k);
-b(h++);
+m = q(g, h);
+b(k++);
 }
-let h = 0, m;
+let k = 0, m;
 g();
 return {
 stop: function() {
@@ -1546,8 +1534,8 @@ m = null;
 };
 };
 return w;
-}({}, K, M));
-D.register("2e", function(w, r, F) {
+}({}, L, M));
+D.register("2d", function(w, r, F) {
 function y(p, x, v, f) {
 if (e) {
 const a = v;
@@ -1568,7 +1556,7 @@ p.stopPropagation();
 return !1;
 }
 let t;
-const e = !!r.navigator.msPointerEnabled, b = e ? "MSPointerDown" : "touchstart", k = e ? "MSPointerMove" : "touchmove", g = e ? "MSPointerUp" : "touchend";
+const e = !!r.navigator.msPointerEnabled, b = e ? "MSPointerDown" : "touchstart", h = e ? "MSPointerMove" : "touchmove", g = e ? "MSPointerUp" : "touchend";
 w.ok = function(p) {
 null == t && (t = "function" === typeof F.body.addEventListener);
 t && p && p(w);
@@ -1586,26 +1574,26 @@ p.removeEventListener(d, a[d], !1);
 }
 const a = {};
 a[b] = function(d) {
-h(d, function(l, n) {
+k(d, function(l, n) {
 n.type = b;
 x(d, n, c);
 });
-v(k);
+v(h);
 v(g);
 return !0;
 };
 a[g] = function(d) {
-f(k);
+f(h);
 f(g);
-h(d, function(l, n) {
+k(d, function(l, n) {
 n.type = g;
 x(d, n, c);
 });
 return !0;
 };
-a[k] = function(d) {
-h(d, function(l, n) {
-n.type = k;
+a[h] = function(d) {
+k(d, function(l, n) {
+n.type = h;
 x(d, n, c);
 });
 return q(d);
@@ -1614,7 +1602,7 @@ v(b);
 let c = {
 kill: function() {
 f(b);
-f(k);
+f(h);
 f(g);
 p = c = x = null;
 }
@@ -1637,7 +1625,7 @@ u[b] = function(E) {
 l = !1;
 c();
 const G = m();
-h(E, function(H, J) {
+k(E, function(H, J) {
 C[H] = G;
 z[H] = J.clientX;
 A[H] = J.clientY;
@@ -1646,7 +1634,7 @@ n = p.scrollLeft;
 return !0;
 };
 u[g] = function(E) {
-h(E, function(G, H) {
+k(E, function(G, H) {
 const J = m() - C[G];
 G = z[G] - H.clientX;
 x(Math.abs(G) / J, G ? 0 > G ? -1 : 1 : 0);
@@ -1654,9 +1642,9 @@ x(Math.abs(G) / J, G ? 0 > G ? -1 : 1 : 0);
 n = null;
 return !0;
 };
-u[k] = function(E) {
+u[h] = function(E) {
 let G, H;
-null == n || h(E, function(J, O) {
+null == n || k(E, function(J, O) {
 G = z[J] - O.clientX;
 H = A[J] - O.clientY;
 });
@@ -1664,11 +1652,11 @@ if (H && Math.abs(H) > Math.abs(G)) return l = !0;
 G && (l = !0, p.scrollLeft = Math.max(0, n + G));
 return q(E);
 };
-if (!e || v) f(b), f(k), f(g), e && (p.className += " mstouch");
+if (!e || v) f(b), f(h), f(g), e && (p.className += " mstouch");
 return {
 kill: function() {
 a(b);
-a(k);
+a(h);
 a(g);
 c();
 },
@@ -1686,7 +1674,7 @@ scroll: function(E, G, H) {
 c();
 let J = p.scrollLeft;
 const O = E > J ? 1 : -1, R = Math[1 === O ? "min" : "max"], I = Math.round(16 * G * O);
-return d = D.require("31").loop(function(Q) {
+return d = D.require("30").loop(function(Q) {
 Q && (J = Math.max(0, R(E, J + I)), p.scrollLeft = J, E === J && (c(), H && H(J)));
 }, p);
 }
@@ -1696,12 +1684,12 @@ w.start = function(p, x) {
 return y(p, b, x, !1);
 };
 w.move = function(p, x) {
-return y(p, k, x, !1);
+return y(p, h, x, !1);
 };
 w.end = function(p, x) {
 return y(p, g, x, !1);
 };
-const h = w.each = function(p, x) {
+const k = w.each = function(p, x) {
 if (e) (p.MSPOINTER_TYPE_TOUCH || "touch") === p.pointerType && x(0, p); else {
 p = (p.originalEvent || p).changedTouches || [];
 for (var v = -1; ++v < p.length; ) x(v, p[v]);
@@ -1710,78 +1698,78 @@ for (var v = -1; ++v < p.length; ) x(v, p[v]);
 return new Date().getTime();
 };
 return w;
-}({}, K, M));
-D.register("32", function(w, r, F) {
+}({}, L, M));
+D.register("31", function(w, r, F) {
 w.init = function(y) {
 function q() {
-k.style.top = String(-y.scrollTop) + "px";
+h.style.top = String(-y.scrollTop) + "px";
 return !0;
 }
 function t() {
-const h = k;
-h.textContent = y.value;
-const m = h.innerHTML;
-"" !== m && (h.innerHTML = m.replace(/[ \t]/g, e).split(/\n|\r\n?/).join('<span class="eol crlf"></span>\r\n') + '<span class="eol eof"></span>');
+const k = h;
+k.textContent = y.value;
+const m = k.innerHTML;
+"" !== m && (k.innerHTML = m.replace(/[ \t]/g, e).split(/\n|\r\n?/).join('<span class="eol crlf"></span>\r\n') + '<span class="eol eof"></span>');
 return !0;
 }
-function e(h) {
-return '<span class="x' + h.charCodeAt(0).toString(16) + '">' + h + "</span>";
+function e(k) {
+return '<span class="x' + k.charCodeAt(0).toString(16) + '">' + k + "</span>";
 }
 const b = y.parentNode;
-let k = b.insertBefore(F.createElement("div"), y);
+let h = b.insertBefore(F.createElement("div"), y);
 B(y).on("input", t).on("scroll", q);
 B(b).addClass("has-mirror");
-k.className = "ta-mirror";
+h.className = "ta-mirror";
 const g = y.offsetWidth - y.clientWidth;
-2 < g && (k.style.marginRight = String(g - 2) + "px");
+2 < g && (h.style.marginRight = String(g - 2) + "px");
 t();
 q();
 return {
 kill: function() {
 B(y).off("input", t).off("scroll", q);
-b.removeChild(k);
-k = null;
+b.removeChild(h);
+h = null;
 B(b).removeClass("has-mirror");
 }
 };
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("23", function(w, r, F) {
 function y(e, b) {
 e = q[e] || [];
 b = b && r[b];
-const k = e.length;
-let g = -1, h = 0;
-for (;++g < k; ) {
+const h = e.length;
+let g = -1, k = 0;
+for (;++g < h; ) {
 const m = e[g];
-"function" === typeof m && (m(b), h++);
+"function" === typeof m && (m(b), k++);
 }
-return h;
+return k;
 }
 const q = {};
 let t = "";
-w.load = function(e, b, k) {
+w.load = function(e, b, h) {
 function g() {
 p && (clearTimeout(p), p = null);
 x && (x.onreadystatechange = null, x = x = x.onload = null);
 e && (delete q[e], e = null);
 }
-function h(v, f) {
+function k(v, f) {
 v = x && x.readyState;
-if (f || !v || "loaded" === v || "complete" === v) f || y(e, k), g();
+if (f || !v || "loaded" === v || "complete" === v) f || y(e, h), g();
 }
 function m() {
-if (0 === y(e)) throw Error('Failed to load "' + (k || e) + '"');
+if (0 === y(e)) throw Error('Failed to load "' + (h || e) + '"');
 g();
 }
-if (k && r[k]) "function" === typeof b && b(r[k]); else if (null != q[e]) q[e].push(b); else {
+if (h && r[h]) "function" === typeof b && b(r[h]); else if (null != q[e]) q[e].push(b); else {
 q[e] = [ b ];
 var p = setTimeout(m, 4e3), x = F.createElement("script");
 x.setAttribute("src", e);
 x.setAttribute("async", "true");
-x.onreadystatechange = h;
-x.onload = h;
+x.onreadystatechange = k;
+x.onload = k;
 x.onerror = m;
 x.onabort = g;
 F.getElementsByTagName("head")[0].appendChild(x);
@@ -1792,19 +1780,19 @@ var b;
 if (!(b = t)) {
 {
 b = F.getElementsByTagName("script");
-const k = b.length;
-let g = -1, h = "";
-for (;++g < k; ) {
+const h = b.length;
+let g = -1, k = "";
+for (;++g < h; ) {
 const m = b[g].getAttribute("src");
 if (m) {
 const p = m.indexOf("/lib/vendor");
 if (-1 !== p) {
-h = m.substring(0, p);
+k = m.substring(0, p);
 break;
 }
 }
 }
-b = h || "/static";
+b = k || "/static";
 }
 b = t = b;
 }
@@ -1814,7 +1802,7 @@ w.css = function(e, b) {
 F.getElementById(b) || B("<link />").attr("rel", "stylesheet").attr("href", e).attr("id", b).appendTo(F.head);
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("10", function(w, r, F) {
 function y(m, p) {
 m.setReadOnly(!1);
@@ -1874,7 +1862,7 @@ regex: /<(?:xliff:)?(bx|ex|x)[^\/>]*\/>/
 token: "constant.language",
 regex: /<\/?[:a-z]+[^>]*>/
 } ]
-}, x = k(m);
+}, x = h(m);
 "icu" === m ? p = {
 start: p.start.concat([ {
 token: "icu-quoted",
@@ -1916,7 +1904,7 @@ regex: x
 this.$rules = p;
 };
 }
-function k(m) {
+function h(m) {
 switch (m) {
 case "objc":
 return /%(?:\d+\$)?[-+'0# ]*\d*(?:\.\d+|\.\*(?:\d+\$)?)?(?:hh?|ll?|[qjzTL])?[sScCdDioOuUxXfFeEgGaAp%@]/;
@@ -1939,13 +1927,13 @@ return /%(?:[1-9]\d*\$)?\+?(?:0|'[^$])?-?\d*(?:\.\d+)?[b-gijostTuvxX%]/;
 case "auto":
 return /%(?:\d+\$|\([_A-Za-z][_A-Za-z0-9]*\))?(?:[-+0]?\d*(\.\d+)?[duxoefgaDUXOEFGA]|[@scSC%])/;
 
-case h:
+case k:
 return g || /%%/;
 }
 }
-let g, h = "auto";
+let g, k = "auto";
 w.init = function(m, p, x) {
-let v, f = !1, a = x || h, c = m.parentNode, d = c.appendChild(F.createElement("div"));
+let v, f = !1, a = x || k, c = m.parentNode, d = c.appendChild(F.createElement("div"));
 B(c).addClass("has-proxy has-ace");
 var l = r.loco;
 x = D.require("23");
@@ -2000,7 +1988,7 @@ f !== n && (f = n, v && v.setShowInvisibles(n));
 return this;
 },
 strf: function(n) {
-n = n || h;
+n = n || k;
 n !== a && (a = n, v && v.session.setMode(e(r.ace, n)));
 return this;
 },
@@ -2011,24 +1999,24 @@ return this;
 };
 };
 w.strf = function(m, p) {
-h = m;
+k = m;
 g = p;
 return w;
 };
 return w;
-}({}, K, M));
-D.register("33", function(w, r, F) {
-function y(b, k) {
+}({}, L, M));
+D.register("32", function(w, r, F) {
+function y(b, h) {
 function g() {
-return k.val(b.getContent());
+return h.val(b.getContent());
 }
 b.on("input", g);
 b.on("change", g);
 b.on("focus", function() {
-return k.focus();
+return h.focus();
 });
 b.on("blur", function() {
-return k.blur();
+return h.blur();
 });
 b.setMode("design");
 }
@@ -2044,18 +2032,18 @@ b.setMode("readonly");
 }
 let e = 0;
 w.load = function(b) {
-const k = D.require("23");
-k.css(k.stat("/css/lib/tinymce.css"), "tinymce-css");
-k.load(k.stat("/lib/tinymce.min.js"), b, "tinymce");
+const h = D.require("23");
+h.css(h.stat("/css/lib/tinymce.css"), "tinymce-css");
+h.load(h.stat("/lib/tinymce.min.js"), b, "tinymce");
 return w;
 };
-w.init = function(b, k) {
+w.init = function(b, h) {
 function g(z) {
 x = z;
 v = "<p>" === z.substring(0, 3) && "</p>" === z.substring(z.length - 4);
 return z.replace(u, "$1x-$2");
 }
-function h(z) {
+function k(z) {
 m = z;
 z._getContent = z.getContent;
 z.getContent = function(A) {
@@ -2072,7 +2060,7 @@ z.setContent = function(A, E) {
 return this._setContent(g(A), E);
 };
 z.setContent(b.value);
-k ? (y(z, k), k.reset()) : t(z);
+h ? (y(z, h), h.reset()) : t(z);
 B(c).removeClass("loading");
 }
 let m, p = !1, x = "", v = !1, f = b.parentNode, a = f.parentNode, c = f.appendChild(F.createElement("div")), d = a.insertBefore(F.createElement("nav"), f);
@@ -2123,34 +2111,34 @@ keep_styles: !1,
 extended_valid_elements: "span,b,i,u,x-" + l.join("[*],x-") + "[*]",
 protect: [ new RegExp("<(?:" + n.join("|") + ")[^>]*>", "gi") ],
 invalid_elements: l.join(",") + "," + n.join(","),
-init_instance_callback: h
+init_instance_callback: k
 });
 });
 return {
 val: function(z) {
 z = g(z);
 null == m ? (b.value = z, console.log(".EARLY => .val( " + z), B(c).html(z)) : m.getContent() !== z && m.setContent(z);
-k && k.val(z);
+h && h.val(z);
 return this;
 },
 kill: function() {
-m && (k && k.val(m.getContent()), q(m), m.destroy(), m = null);
+m && (h && h.val(m.getContent()), q(m), m.destroy(), m = null);
 c && (f.removeChild(c), B(f).removeClass("has-proxy has-mce"), c = null);
 d && (a.removeChild(d), d = null);
 return this;
 },
 enable: function(z) {
-k = z;
+h = z;
 m && y(m, z);
 return this;
 },
 disable: function() {
 m && t(m);
-k = null;
+h = null;
 return this;
 },
 focus: function() {
-m && k && m.focus();
+m && h && m.focus();
 return this;
 },
 invs: function(z) {
@@ -2161,8 +2149,8 @@ return this;
 };
 };
 return w;
-}({}, K, M));
-D.register("34", function(w, r, F) {
+}({}, L, M));
+D.register("33", function(w, r, F) {
 w.init = function(y, q) {
 function t(a) {
 x !== a && (f.textContent = a.format(0), x = a, a = 0 === a ? "empty" : 0 === q || a < q ? "lt" : q === a ? "eq" : "gt", 
@@ -2176,46 +2164,46 @@ q = a;
 function b(a, c) {
 t(c.length);
 }
-function k() {
+function h() {
 p = "";
 x = -1;
 t(y.val().length);
 }
-const g = D.require("1a"), h = B(y.parent()).on("changing", b);
+const g = D.require("1a"), k = B(y.parent()).on("changing", b);
 let m, p, x, v = g.el("div"), f = v.appendChild(g.el("span"));
-h.append(v);
+k.append(v);
 e(q);
-k();
+h();
 return {
 ping: function(a) {
 null != a && a !== q && (q = a, e(a));
-k();
+h();
 },
 kill: function() {
-const a = h && h[0];
-a && v && v.parentNode === a && (h.off("changing", b), a.removeChild(v));
+const a = k && k[0];
+a && v && v.parentNode === a && (k.off("changing", b), a.removeChild(v));
 }
 };
 };
 return w;
-}({}, K, M));
-D.register("2f", function(w, r, F) {
+}({}, L, M));
+D.register("2e", function(w, r, F) {
 function y(e) {
 function b() {
-f && (p.off("input", k), f = !1);
+f && (p.off("input", h), f = !1);
 }
-function k() {
+function h() {
 const c = e.value;
 c !== a && (p.trigger("changing", [ c, a ]), a = c);
 }
 function g() {
-k();
+h();
 f && v !== a && p.trigger("changed", [ a ]);
 }
-function h() {
+function k() {
 t = e;
 v = a;
-f || (p.on("input", k), f = !0);
+f || (p.on("input", h), f = !0);
 p.trigger("editFocus");
 x.addClass("has-focus");
 return !0;
@@ -2229,7 +2217,7 @@ return !0;
 }
 const p = B(e), x = B(e.parentNode);
 let v, f = !1, a = e.value;
-p.on("blur", m).on("focus", h);
+p.on("blur", m).on("focus", k);
 return {
 val: function(c) {
 a !== c && (e.value = c, p.triggerHandler("input"), a = c);
@@ -2237,15 +2225,15 @@ return !0;
 },
 kill: function() {
 b();
-p.off("blur", m).off("focus", h);
+p.off("blur", m).off("focus", k);
 },
 fire: function() {
 a = null;
-k();
+h();
 },
 ping: g,
 blur: m,
-focus: h,
+focus: k,
 reset: function() {
 v = a = e.value;
 }
@@ -2272,20 +2260,20 @@ this.nocount();
 this.e = null;
 };
 r.reload = function(e, b) {
-let k = this.l;
+let h = this.l;
 this.nocount();
-k && !b && (this.disable(), k = null);
+h && !b && (this.disable(), h = null);
 this.val(e || "");
-b && !k && this.enable();
+b && !h && this.enable();
 return this;
 };
 r.val = function(e) {
 const b = this.e;
 if (null == e) return b.value;
-const k = this.l, g = this.p;
+const h = this.l, g = this.p;
 g && g.val(e);
-k && k.val(e);
-k || b.value === e || (b.value = e, B(b).triggerHandler("input"));
+h && h.val(e);
+h || b.value === e || (b.value = e, B(b).triggerHandler("input"));
 return this;
 };
 r.fire = function() {
@@ -2307,9 +2295,9 @@ r.parent = function() {
 return this.e.parentNode;
 };
 r.attr = function(e, b) {
-const k = this.e;
-if (1 === arguments.length) return k.getAttribute(e);
-null == b ? k.removeAttribute(e) : k.setAttribute(e, b);
+const h = this.e;
+if (1 === arguments.length) return h.getAttribute(e);
+null == b ? h.removeAttribute(e) : h.setAttribute(e, b);
 return this;
 };
 r.editable = function() {
@@ -2341,8 +2329,8 @@ e && (e.kill(), this.l = null);
 return this;
 };
 r.setInvs = function(e, b) {
-const k = this.i || !1;
-if (b || k !== e) this._i && (this._i.kill(), delete this._i), (b = this.p) && b.invs ? b.invs(e) : e && (this._i = D.require("32").init(this.e)), 
+const h = this.i || !1;
+if (b || h !== e) this._i && (this._i.kill(), delete this._i), (b = this.p) && b.invs ? b.invs(e) : e && (this._i = D.require("31").init(this.e)), 
 this.i = e;
 return this;
 };
@@ -2350,9 +2338,9 @@ r.getInvs = function() {
 return this.i || !1;
 };
 r.setMode = function(e) {
-let b = this.p, k = this.i || !1;
-e !== (this.m || "") && (this.m = e, b && b.kill(), this.p = b = "code" === e ? D.require("10").init(this.e, this.l, this["%"]) : "html" === e ? D.require("33").init(this.e, this.l) : null, 
-this.setInvs(k, !0), t && this.focus());
+let b = this.p, h = this.i || !1;
+e !== (this.m || "") && (this.m = e, b && b.kill(), this.p = b = "code" === e ? D.require("10").init(this.e, this.l, this["%"]) : "html" === e ? D.require("32").init(this.e, this.l) : null, 
+this.setInvs(h, !0), t && this.focus());
 return this;
 };
 r.setStrf = function(e) {
@@ -2374,7 +2362,7 @@ e && e.resize && e.resize();
 };
 r.counter = function(e) {
 let b = this.c;
-b ? b.ping(e) : this.c = D.require("34").init(this, e);
+b ? b.ping(e) : this.c = D.require("33").init(this, e);
 e = String(e || "0");
 "0" === e ? this.e.removeAttribute("maxlength") : e !== this.e.getAttribute("maxlength") && this.e.setAttribute("maxlength", e);
 return this;
@@ -2384,8 +2372,8 @@ const e = this.c;
 e && (e.kill(), this.c = null, this.e.removeAttribute("maxlength"));
 };
 return w;
-}({}, K, M));
-D.register("30", function(w, r, F) {
+}({}, L, M));
+D.register("2f", function(w, r, F) {
 function y(f) {
 const a = r.console;
 a && a.error && a.error(f);
@@ -2415,7 +2403,7 @@ f.redrawDirty() && f.redraw();
 return !0;
 };
 }
-function k(f) {
+function h(f) {
 return function(a) {
 var c = a.keyCode;
 if (40 === c) c = 1; else if (38 === c) c = -1; else return !0;
@@ -2442,7 +2430,7 @@ return u * (C[z] || d(z)).cellVal(n).localeCompare((C[A] || d(A)).cellVal(n));
 });
 };
 }
-function h(f) {
+function k(f) {
 this.w = f;
 }
 function m(f) {
@@ -2462,9 +2450,9 @@ this.live = f;
 this.rows = [];
 }
 w.create = function(f) {
-return new h(f);
+return new k(f);
 };
-var v = h.prototype;
+var v = k.prototype;
 v.init = function(f) {
 let a = this.w, c = a.id;
 var d = a.splity(c + "-thead", c + "-tbody"), l = d[0];
@@ -2497,7 +2485,7 @@ a.lock().resize(l, d);
 this.sc ? this._re_sort(G) : f.sort && f.sort(u);
 this.redrawDirty();
 this.render();
-B(A).attr("tabindex", "-1").on("keydown", k(this)).on("mousedown", e(this)).on("scroll", b(this));
+B(A).attr("tabindex", "-1").on("keydown", h(this)).on("mousedown", e(this)).on("scroll", b(this));
 return this;
 };
 v.clear = function() {
@@ -2794,8 +2782,8 @@ f.parentNode.removeChild(f);
 for (f = a.length; 0 !== f--; ) a[f].destroy();
 };
 return w;
-}({}, K, M));
-D.register("2b", function(w, r, F) {
+}({}, L, M));
+D.register("2a", function(w, r, F) {
 function y(d, l) {
 var n = d.id;
 let u = n && v[n], C = u && u.parent();
@@ -2851,7 +2839,7 @@ f && f.redraw();
 d && d.redraw();
 return f = d;
 }
-function k(d, l) {
+function h(d, l) {
 const n = B(l);
 n.on("editFocus", function(u) {
 u.stopPropagation();
@@ -2871,12 +2859,12 @@ this.css = u.concat("wg-cell");
 v[l] = this;
 this.clear();
 }
-const h = D.include("2d") || D.require("2"), m = D.require("1a"), p = m.top, x = m.left, v = {};
+const k = D.include("2c") || D.require("2"), m = D.require("1a"), p = m.top, x = m.left, v = {};
 let f, a = 0, c = !1;
 w.init = function(d) {
 const l = new g(d);
 l.redraw();
-D.require("2e").ok(function(n) {
+D.require("2d").ok(function(n) {
 n.dragger(d, t);
 });
 B(d).on("mousedown", q);
@@ -3060,13 +3048,13 @@ n.reload(d, l);
 u !== l && this.restyle();
 } else this.length && this.clear(), u = m.el("textarea"), u.setAttribute("wrap", "virtual"), 
 u.setAttribute("autocomplete", "off"), u.setAttribute("id", "wg" + String(++a)), 
-u.value = d, this.contents(u), n = D.require("2f")._new(u)[l ? "enable" : "disable"](), 
-k(this, u), this.field = n, this.restyle();
+u.value = d, this.contents(u), n = D.require("2e")._new(u)[l ? "enable" : "disable"](), 
+h(this, u), this.field = n, this.restyle();
 this.lang || this.locale("en");
 return n;
 };
 r.locale = function(d) {
-d = D.require("29").cast(d);
+d = D.require("28").cast(d);
 return this._locale(String(d), d.isRTL());
 };
 r._locale = function(d, l, n) {
@@ -3094,20 +3082,20 @@ n.eachTextarea(d);
 return this;
 };
 r.append = function(d) {
-d && (d.nodeType ? h.init(this.body.appendChild(d)) : h.init(B(d).appendTo(this.body)));
+d && (d.nodeType ? k.init(this.body.appendChild(d)) : k.init(B(d).appendTo(this.body)));
 return this;
 };
 r.prepend = function(d) {
 const l = this.body;
 if (d.nodeType) {
 const n = l.firstChild;
-h.init(n ? l.insertBefore(d, n) : l.appendChild(d));
-} else h.init(B(d).prependTo(l));
+k.init(n ? l.insertBefore(d, n) : l.appendChild(d));
+} else k.init(B(d).prependTo(l));
 return this;
 };
 r.before = function(d) {
 const l = this.body;
-d.nodeType ? h.init(this.el.insertBefore(d, l)) : h.init(B(d).insertBefore(l));
+d.nodeType ? k.init(this.el.insertBefore(d, l)) : k.init(B(d).insertBefore(l));
 return this;
 };
 r.header = function(d, l) {
@@ -3139,7 +3127,7 @@ this.body.scrollTop = d;
 };
 r.tabulate = function(d) {
 let l = this.table;
-l ? l.clear() : l = D.require("30").create(this);
+l ? l.clear() : l = D.require("2f").create(this);
 l.init(d);
 return this.table = l;
 };
@@ -3204,7 +3192,7 @@ if (d) return B(d).data("idx");
 };
 r = null;
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("1d", function(w, r, F) {
 function y(a, c) {
 a.stopPropagation();
@@ -3224,7 +3212,7 @@ return c.join(" ");
 function e(a, c, d) {
 c = B(a.title(c).parentNode);
 let l = c.find("span.lang");
-d ? (d = D.require("29").cast(d), l.length || (l = B("<span></span>").prependTo(c)), 
+d ? (d = D.require("28").cast(d), l.length || (l = B("<span></span>").prependTo(c)), 
 l.attr("lang", d.lang).attr("class", d.getIcon() || "lang region region-" + (d.region || "zz").toLowerCase())) : (l.remove(), 
 d = "en");
 a.locale(d);
@@ -3237,7 +3225,7 @@ n || l.preventDefault();
 return n;
 });
 }
-function k(a, c, d, l) {
+function h(a, c, d, l) {
 let n = a[c];
 return d.length ? (n || (n = l.find("div.meta"), n.length || (n = B('<div class="meta"></div>').insertAfter(l.header())), 
 b(a, n, "poMeta"), a[c] = n), n.html(d.join("\n")).show(), !0) : n && n.text() ? (n.text("").hide(), 
@@ -3247,7 +3235,7 @@ function g() {
 this.dirty = 0;
 }
 D.require("3");
-const h = D.require("28").html, m = D.require("6").sprintf;
+const k = D.require("6").html, m = D.require("6").sprintf;
 let p, x;
 w.extend = function(a) {
 return a.prototype = new g();
@@ -3263,7 +3251,7 @@ a.innerHTML = d.replace(c, "data-x-loco-$1=");
 const l = a.textContent.trim();
 return l ? l.replace("data-x-loco-", "") : d.trim();
 };
-}(), f = g.prototype = D.require("2a").init([ "getListColumns", "getListHeadings", "getListEntry" ], [ "editable", "t" ]);
+}(), f = g.prototype = D.require("29").init([ "getListColumns", "getListHeadings", "getListEntry" ], [ "editable", "t" ]);
 f.init = function() {
 this.$t = null;
 this.localise();
@@ -3300,7 +3288,7 @@ function c(l) {
 d.redraw(!0, l);
 return !0;
 }
-const d = D.require("2b").init(a);
+const d = D.require("2a").init(a);
 B(r).on("resize", c);
 this.redraw = c;
 B(a).on("wgFocus wgBlur", y);
@@ -3520,52 +3508,55 @@ return this;
 f.setStatus = function() {
 return null;
 };
+f.allowRichMeta = function() {
+return !1;
+};
 f.setSrcMeta = function(a, c) {
 const d = [];
 var l = this.labels, n = a.context();
 let u = [], C = a.tags(), z = C && C.length;
-n && (u.push("<span>" + h(l[4]) + "</span>"), u.push('<mark class="ctxt">' + h(n) + "</mark>"));
-if (z && this.getTag) for (u.push("<span>Tagged:</span>"), l = -1; ++l < z; ) (n = this.getTag(C[l])) && u.push("<mark>" + h(n.mod_name) + "</mark>");
+n && (u.push("<span>" + k(l[4]) + "</span>"), u.push('<mark class="ctxt">' + k(n) + "</mark>"));
+if (z && this.getTag) for (u.push("<span>Tagged:</span>"), l = -1; ++l < z; ) (n = this.getTag(C[l])) && u.push("<mark>" + k(n.mod_name) + "</mark>");
 u.length && d.push('<p class="tags">' + u.join(" ") + "</p>");
 if (this.getMono() && (n = a.refs()) && (C = n.split(/\s/), z = C.length)) {
-for (u = []; 0 <= --z; ) n = C[z], u.push("<code>" + h(n) + "</code>");
+for (u = []; 0 <= --z; ) n = C[z], u.push("<code>" + k(n) + "</code>");
 d.push('<p class="has-icon icon-file">' + u.join(" ") + "</p>");
 }
 (n = a.format()) && "no-" !== n.substring(0, 3) && d.push('<p class="has-icon icon-help">This string is formatted. <a href="#format">See full details</a>.</p>');
-(n = a.notes()) && d.push('<p class="has-icon icon-info">' + h(n, !0) + "</p>");
-return k(this, "$smeta", d, c);
+(n = a.notes()) && d.push('<p class="has-icon icon-info">' + k(n, this.allowRichMeta()) + "</p>");
+return h(this, "$smeta", d, c);
 };
 f.setTrgMeta = function(a, c, d) {
-const l = [], n = (c = a.errors(c)) && c.length;
-if (n) for (let u = 0; u < n; u++) l.push('<p class="has-icon icon-warn">' + h(c[u], !0) + ".</p>");
-a.tcmt && l.push('<p class="has-icon icon-info">' + h(a.tcmt, !0) + "</p>");
-return k(this, "$tmeta", l, d);
+const l = [], n = (c = a.errors(c)) && c.length, u = this.allowRichMeta();
+if (n) for (let C = 0; C < n; C++) l.push('<p class="has-icon icon-warn">' + k(c[C], u) + ".</p>");
+a.tcmt && l.push('<p class="has-icon icon-info">' + k(a.tcmt, u) + "</p>");
+return h(this, "$tmeta", l, d);
 };
 f.loadMessage = function(a) {
 function c(N) {
 if ("=" === N.charAt(0)) {
-const L = N.split(" ");
-N = L[0].substring(1);
-L[0] = [ "Zero", "One", "Two" ][Number(N)] || N;
-N = L.join(" ");
+const K = N.split(" ");
+N = K[0].substring(1);
+K[0] = [ "Zero", "One", "Two" ][Number(N)] || N;
+N = K.join(" ");
 }
 return N;
 }
-function d(N, L) {
+function d(N, K) {
 const S = ma;
 var P = da[0];
 N.off();
-N.titled() !== P && e(N, P, L || "en");
+N.titled() !== P && e(N, P, K || "en");
 P = !1;
 A.setSrcMeta(a, N) && (P = !0);
 if (a.plural()) {
 P = -1;
 let U = [], V = [];
 const Y = N.id + "-";
-L = a.sourceForms() || L && L.plurals || q(2);
-const ea = L.length;
-if (2 !== ea || "=" === L[0].charAt(0) && "=1" !== L[0]) for (;++P < ea; ) U[P] = Y + String(P), 
-V[P] = c(L[P].split(" ", 1)[0]) + ":"; else U = [ Y + "-0", Y + "-1" ], V = [ da[1], da[2] ];
+K = a.sourceForms() || K && K.plurals || q(2);
+const ea = K.length;
+if (2 !== ea || "=" === K[0].charAt(0) && "=1" !== K[0]) for (;++P < ea; ) U[P] = Y + String(P), 
+V[P] = c(K[P].split(" ", 1)[0]) + ":"; else U = [ Y + "-0", Y + "-1" ], V = [ da[1], da[2] ];
 N.splity.apply(N, U);
 N.each(function(fa, aa) {
 fa.header(V[aa]).textarea(a.source(null, aa), S).setStrf(J).setMode(ba).setInvs(G);
@@ -3577,65 +3568,65 @@ l(fa, aa);
 } else P && N.redraw(), N.textarea(a.source(), S).setStrf(J).setMode(ba).setInvs(G), 
 S && l(N, 0);
 }
-function l(N, L) {
+function l(N, K) {
 N.on("changing", function(S, P) {
-a.source(P, L);
-0 === L && A.updateListCell(a, "source");
-A.unsave(a, L);
+a.source(P, K);
+0 === K && A.updateListCell(a, "source");
+A.unsave(a, K);
 }).on("changed", function() {
-0 === L && A.po.reIndex(a);
+0 === K && A.po.reIndex(a);
 A.dict && A.rebuildSearch();
 A.fire("poUpdate", [ a ]);
 });
 }
-function n(N, L, S, P) {
-Z && L.eachTextarea(function(V) {
+function n(N, K, S, P) {
+Z && K.eachTextarea(function(V) {
 V.ping();
 });
-L.off("changing").off("changed");
+K.off("changing").off("changed");
 var U = m(da[3], S.label || "Target");
-L.titled() !== U && e(L, U, S);
+K.titled() !== U && e(K, U, S);
 U = !1;
-!N && A.setSrcMeta(a, L) && (U = !0);
-A.setTrgMeta(a, P, L) && (U = !0);
+!N && A.setSrcMeta(a, K) && (U = !0);
+A.setTrgMeta(a, P, K) && (U = !0);
 A.setStatus(a, P);
 if (1 !== S.nplurals && a.pluralized()) {
 N = function(W) {
 W < aa && (Y.push(c(fa[W])), V.push(ea + String(W)));
 };
 let V = [], Y = [];
-const ea = L.id + "-", fa = a.targetForms() || S.plurals || q(S.nplurals), aa = fa.length;
+const ea = K.id + "-", fa = a.targetForms() || S.plurals || q(S.nplurals), aa = fa.length;
 for (a.eachMsg(N); (S = V.length) < aa; ) N(S);
-L.splitx.apply(L, V);
-L.each(function(W, ca) {
+K.splitx.apply(K, V);
+K.each(function(W, ca) {
 const na = Z && !a.disabled(ca);
 W.textarea(a.translation(ca), na).setStrf(J).setMode(ba).setInvs(G);
 Z && u(W, ca);
 });
-L.navigize(Y, P || null).on("wgTabSelect", function(W, ca) {
+K.navigize(Y, P || null).on("wgTabSelect", function(W, ca) {
 (W = Z && W.cell.editable()) && W.focus();
-A.setTrgMeta(a, ca, L);
+A.setTrgMeta(a, ca, K);
 A.setStatus(a, ca);
 A.fire("poTab", [ ca ]);
 });
-} else U && L.redraw(), L.textarea(a.translation(), Z && !a.disabled(0)).setStrf(J).setMode(ba).setInvs(G), 
-Z && u(L, 0);
+} else U && K.redraw(), K.textarea(a.translation(), Z && !a.disabled(0)).setStrf(J).setMode(ba).setInvs(G), 
+Z && u(K, 0);
 }
-function u(N, L) {
+function u(N, K) {
 function S() {
 P = null;
 A.validate(a);
-const V = a.errors(L).join(" ");
-U !== V && (U = V, A.setTrgMeta(a, L, N) && N.redraw(), A.reCssRow(a));
+const V = a.errors(K).join(" ");
+U !== V && (U = V, A.setTrgMeta(a, K, N) && N.redraw(), A.reCssRow(a));
 }
-let P, U = a.errors(L).join(" ");
+let P, U = a.errors(K).join(" ");
 N.on("changing", function(V, Y, ea) {
 P && (clearTimeout(P), P = null);
-a.translate(Y, L);
-0 === L && A.updateListCell(a, "target");
-a.fuzzy(L) && a.saved(L) ? A.fuzzy(!1, a, L) : A.unsave(a, L);
-"" === Y ? (A.fire("poEmpty", [ !0, a, L ]), A.setStatus(a, L)) : "" === ea && (A.fire("poEmpty", [ !1, a, L ]), 
-A.setStatus(a, L));
+a.translate(Y, K);
+0 === K && A.updateListCell(a, "target");
+a.fuzzy(K) && a.saved(K) ? A.fuzzy(!1, a, K) : A.unsave(a, K);
+"" === Y ? (A.fire("poEmpty", [ !0, a, K ]), A.setStatus(a, K)) : "" === ea && (A.fire("poEmpty", [ !1, a, K ]), 
+A.setStatus(a, K));
 P = setTimeout(S, U ? 300 : 1e3);
 }).on("changed", function() {
 A.dict && A.rebuildSearch();
@@ -3644,8 +3635,8 @@ A.fire("poUpdate", [ a ]);
 }
 function C(N) {
 N.off();
-const L = da[4];
-N.titled() !== L && (e(N, L), A.setStatus(null));
+const K = da[4];
+N.titled() !== K && (e(N, K), A.setStatus(null));
 N.textarea(a.context(), !0).setMode(ba).setInvs(G);
 oa && N.on("changing", function(S, P) {
 a.context(P);
@@ -3658,8 +3649,8 @@ A.fire("poUpdate", [ a ]);
 });
 }
 function z(N) {
-const L = da[5];
-N.titled() !== L && e(N, L);
+const K = da[5];
+N.titled() !== K && e(N, K);
 N.off().on("changing", function(S, P) {
 a.comment(P);
 A.fire("poComment", [ a, P ]);
@@ -3796,7 +3787,7 @@ f.validate = function(a) {
 return 0;
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("1e", function(w, r, F) {
 w.init = function() {
 const y = /%([1-9]\d*\$)?[s%]/, q = /%([1-9]\d*\$)?(?:'.|[-+0 ])*\d*(?:\.\d+)?(.|$)/g;
@@ -3804,22 +3795,22 @@ return {
 parse: function(t, e) {
 const b = e && e.count || 0;
 e = e && e.types || {};
-let k = !0, g = 0, h = 0;
+let h = !0, g = 0, k = 0;
 for (var m; null != (m = q.exec(t)); ) {
 const p = m[2];
 if ("%" !== p || "%%" !== m[0]) {
 if ("" === p || -1 === "suxXbcdeEfFgGo".indexOf(p)) {
-k = !1;
+h = !1;
 break;
 }
-null == m[1] ? m = ++h : (m = parseInt(m[1]), g = Math.max(g, m));
+null == m[1] ? m = ++k : (m = parseInt(m[1]), g = Math.max(g, m));
 null == e[m] && (e[m] = {});
 e[m][p] = !0;
 }
 }
-if (k) return {
+if (h) return {
 valid: !0,
-count: Math.max(g, h, b),
+count: Math.max(g, k, b),
 types: e
 };
 q.lastIndex = 0;
@@ -3835,7 +3826,7 @@ return y.test(t);
 };
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("d", function(w, r, F) {
 function y() {
 this.init();
@@ -3846,23 +3837,23 @@ D.require("c").init(g);
 return g;
 }
 function t(g) {
-return q("cloud").attr("title", g.labels[8] + " (Ctrl-U)").on("click", function(h) {
-h.preventDefault();
+return q("cloud").attr("title", g.labels[8] + " (Ctrl-U)").on("click", function(k) {
+k.preventDefault();
 g.focus().fuzzy(!g.fuzzy());
 });
 }
 function e(g) {
-return q("robot").attr("title", g.labels[9] + " (Ctrl-J)").on("click", function(h) {
-h.preventDefault();
+return q("robot").attr("title", g.labels[9] + " (Ctrl-J)").on("click", function(k) {
+k.preventDefault();
 g.fire("poHint");
 });
 }
-function b(g, h) {
-return D.require("6").vsprintf(g, h);
+function b(g, k) {
+return D.require("6").vsprintf(g, k);
 }
 w.init = function(g) {
-const h = new y();
-g = h.setRootCell(g);
+const k = new y();
+g = k.setRootCell(g);
 var m = g.splity("po-list", "po-edit");
 let p = m[0], x = m[1];
 m = x.splitx("po-trans", "po-comment");
@@ -3873,18 +3864,18 @@ v = m[0].header("Loading..");
 m = m[1].header("Loading..");
 g.distribute([ .34 ]);
 x.distribute([ .8 ]);
-h.setListCell(p);
-h.setSourceCell(v);
-h.setTargetCell(m);
-h.commentCell = f;
-h.editable.source = !1;
-return h;
+k.setListCell(p);
+k.setSourceCell(v);
+k.setTargetCell(m);
+k.commentCell = f;
+k.editable.source = !1;
+return k;
 };
 r = y.prototype = D.require("1d").extend(y);
 r.getListHeadings = function() {
-const g = this.t(), h = [ g._x("Source text", "Editor") ];
-this.targetLocale && (h[1] = g._x("Translation", "Editor"));
-return h;
+const g = this.t(), k = [ g._x("Source text", "Editor") ];
+this.targetLocale && (k[1] = g._x("Translation", "Editor"));
+return k;
 };
 r.getListColumns = function() {
 const g = {
@@ -3894,24 +3885,24 @@ this.targetLocale && (g.target = 1);
 return g;
 };
 r.getListEntry = function(g) {
-const h = this.cellText, m = [ function() {
-let p, x = h(g.source() || ""), v = g.context();
+const k = this.cellText, m = [ function() {
+let p, x = k(g.source() || ""), v = g.context();
 return v ? (p = F.createElement("p"), p.appendChild(F.createElement("mark")).innerText = v, 
 p.appendChild(F.createTextNode(" " + x)), p) : x;
 } ];
 this.targetLocale && (m[1] = function() {
-return h(g.translation() || "");
+return k(g.translation() || "");
 });
 return m;
 };
 r.stats = function() {
-let g = this.po, h = g.length, m = 0, p = 0, x = 0;
+let g = this.po, k = g.length, m = 0, p = 0, x = 0;
 g.each(function(v, f) {
 f.fuzzy() ? x++ : f.translated() ? m++ : p++;
 });
 return {
-t: h,
-p: m.percent(h) + "%",
+t: k,
+p: m.percent(k) + "%",
 f: x,
 u: p
 };
@@ -3940,25 +3931,25 @@ r.locked = function() {
 return !this._unlocked;
 };
 r.setStatus = function(g) {
-let h = this.$tnav;
-if (null == g) h && (h.remove(), this.$tnav = null); else {
-h || (this.$tnav = h = B("<nav></nav>").append(t(this)).append(e(this)).appendTo(this.targetCell.header()));
+let k = this.$tnav;
+if (null == g) k && (k.remove(), this.$tnav = null); else {
+k || (this.$tnav = k = B("<nav></nav>").append(t(this)).append(e(this)).appendTo(this.targetCell.header()));
 var m = [];
 g.translated() ? g.fuzzy() && m.push("po-fuzzy") : m.push("po-empty");
-h.attr("class", m.join(" "));
+k.attr("class", m.join(" "));
 }
 };
 r.getSorter = function() {
 function g(p, x) {
 const v = p.weight(), f = x.weight();
-return v === f ? h(p, x) : v > f ? -1 : 1;
+return v === f ? k(p, x) : v > f ? -1 : 1;
 }
-function h(p, x) {
+function k(p, x) {
 return p.hash().localeCompare(x.hash());
 }
 const m = this;
 return function(p) {
-const x = m.po, v = m.locked() ? g : h;
+const x = m.po, v = m.locked() ? g : k;
 p.sort(function(f, a) {
 return v(x.row(f), x.row(a));
 });
@@ -3967,17 +3958,17 @@ return v(x.row(f), x.row(a));
 r.validate = function(g) {
 g.err = null;
 if (g.untranslated(0)) return 0;
-const h = [];
-let m = this.validateMessagePrintf(g, h);
-m && (g.err = h);
+const k = [];
+let m = this.validateMessagePrintf(g, k);
+m && (g.err = k);
 return m;
 };
-r.validateMessagePrintf = function(g, h) {
+r.validateMessagePrintf = function(g, k) {
 const m = g.format();
 if ("no-" === m.substring(0, 3)) return 0;
 const p = g.msgid(), x = g.msgidPlural();
-null == k && (k = D.require("1e").init());
-var v = k;
+null == h && (h = D.require("1e").init());
+var v = h;
 if (!("" !== m || v.sniff(p) || "" !== x && v.sniff(x))) return 0;
 let f = 0, a = v.parse(p);
 x && a.valid && (a = v.parse(x, a));
@@ -3986,11 +3977,11 @@ let c = a.count;
 if (0 !== c || "" !== m) {
 var d = this;
 g.eachMsg(function(l, n) {
-h[l] = [];
+k[l] = [];
 if ("" !== n) {
 n = v.parse(n);
 var u = n.count;
-l = h[l];
+l = k[l];
 if (n.valid) if (u > c) l.push(b(d.t()._("Too many placeholders; source text formatting suggests a maximum of %s"), [ c ])), 
 f++; else if (u < c && "" === x) l.push(b(d.t()._("Missing placeholders; source text formatting suggests at least %s"), [ c ])), 
 f++; else {
@@ -4007,9 +3998,9 @@ return f;
 }
 };
 r.handle = {};
-let k;
+let h;
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("e", function(w, r, F) {
 const y = {
 copy: 66,
@@ -4052,36 +4043,36 @@ b.setInvs(!b.getInvs());
 }
 };
 w.init = function(e, b) {
-function k(h) {
-if (h.isDefaultPrevented() || !h.metaKey && !h.ctrlKey) return !0;
-const m = h.which;
+function h(k) {
+if (k.isDefaultPrevented() || !k.metaKey && !k.ctrlKey) return !0;
+const m = k.which;
 if (!g[m]) return !0;
 const p = t[m];
-if (!p || h.altKey || h.shiftKey && !q[m] || !1 === p(h, e)) return !0;
-h.stopPropagation();
-h.preventDefault();
+if (!p || k.altKey || k.shiftKey && !q[m] || !1 === p(k, e)) return !0;
+k.stopPropagation();
+k.preventDefault();
 return !1;
 }
 const g = {};
-B(b || r).on("keydown", k);
+B(b || r).on("keydown", h);
 return {
-add: function(h, m) {
-t[y[h]] = m;
+add: function(k, m) {
+t[y[k]] = m;
 return this;
 },
 enable: function() {
-for (const h in arguments) g[y[arguments[h]]] = !0;
+for (const k in arguments) g[y[arguments[k]]] = !0;
 return this;
 },
 disable: function() {
-B(b || r).off("keydown", k);
+B(b || r).off("keydown", h);
 e = b = null;
-for (const h in t) g[h] = !1;
+for (const k in t) g[k] = !1;
 }
 };
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("1f", function(w, r, F) {
 function y() {
 this.reIndex([]);
@@ -4142,18 +4133,18 @@ for (;++b < e; ) q(t[b], this[b], b);
 return this;
 };
 r.sort = function(q) {
-const t = this.length, e = this.keys, b = this.ords, k = [];
+const t = this.length, e = this.keys, b = this.ords, h = [];
 let g = -1;
-for (;++g < t; ) k[g] = [ this[g], e[g] ];
-k.sort(function(m, p) {
+for (;++g < t; ) h[g] = [ this[g], e[g] ];
+h.sort(function(m, p) {
 return q(m[0], p[0]);
 });
 for (g = 0; g < t; g++) {
-var h = k[g];
-this[g] = h[0];
-h = h[1];
-e[g] = h;
-b[h] = g;
+var k = h[g];
+this[g] = k[0];
+k = k[1];
+e[g] = k;
+b[k] = g;
 }
 return this;
 };
@@ -4161,21 +4152,21 @@ r.join = function(q) {
 return [].join.call(this, q);
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("20", function(w, r, F) {
 function y(q, t) {
 var e = new RegExp("^.{0," + (q - 1) + "}[" + t + "]"), b = new RegExp("^[^" + t + "]+");
-return function(k, g) {
-for (var h = k.length, m; h > q; ) {
-m = e.exec(k) || b.exec(k);
+return function(h, g) {
+for (var k = h.length, m; k > q; ) {
+m = e.exec(h) || b.exec(h);
 if (null == m) break;
 m = m[0];
 g.push(m);
 m = m.length;
-h -= m;
-k = k.substring(m);
+k -= m;
+h = h.substring(m);
 }
-0 !== h && g.push(k);
+0 !== k && g.push(h);
 return g;
 };
 }
@@ -4183,7 +4174,7 @@ w.create = function(q) {
 function t(p) {
 return g[p] || "\\" + p;
 }
-var e = /(?:\r\n|[\r\n\v\f\u2028\u2029])/g, b = /[ \r\n]+/g, k = /[\t\v\f\x07\x08\\"]/g, g = {
+var e = /(?:\r\n|[\r\n\v\f\u2028\u2029])/g, b = /[ \r\n]+/g, h = /[\t\v\f\x07\x08\\"]/g, g = {
 "\t": "\\t",
 "\v": "\\v",
 "\f": "\\f",
@@ -4192,13 +4183,13 @@ var e = /(?:\r\n|[\r\n\v\f\u2028\u2029])/g, b = /[ \r\n]+/g, k = /[\t\v\f\x07\x0
 };
 if (null == q || isNaN(q = Number(q))) q = 79;
 if (0 < q) {
-var h = y(q - 3, " ");
+var k = y(q - 3, " ");
 var m = y(q - 2, "-– \\.,:;\\?!\\)\\]\\}\\>");
 }
 return {
 pair: function(p, x) {
 if (!x) return p + ' ""';
-x = x.replace(k, t);
+x = x.replace(h, t);
 var v = 0;
 x = x.replace(e, function() {
 v++;
@@ -4216,14 +4207,14 @@ return x + p.join("\n" + x);
 },
 refs: function(p) {
 p = p.replace(b, " ", p);
-h && (p = h(p, []).join("\n#: "));
+k && (p = k(p, []).join("\n#: "));
 return "#: " + p;
 }
 };
 };
 return w;
-}({}, K, M));
-D.register("2c", function(w, r, F) {
+}({}, L, M));
+D.register("2b", function(w, r, F) {
 function y() {
 this.length = 0;
 }
@@ -4244,13 +4235,13 @@ for (var t = -1, e = this.length; ++t < e; ) q(t, this[t]);
 return this;
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("21", function(w, r, F) {
 function y() {}
 w.extend = function(q) {
 return q.prototype = new y();
 };
-r = y.prototype = D.require("2a").init([ "load" ]);
+r = y.prototype = D.require("29").init([ "load" ]);
 r.row = function(q) {
 return this.rows[q];
 };
@@ -4268,16 +4259,16 @@ this.loc = null;
 return q;
 };
 r.locale = function(q) {
-null == q ? q = this.loc : this.loc = q = D.require("29").cast(q);
+null == q ? q = this.loc : this.loc = q = D.require("28").cast(q);
 return q;
 };
 r.source = function(q) {
-null == q ? q = this.src || D.require("29").cast({
+null == q ? q = this.src || D.require("28").cast({
 lang: "en",
 label: "English",
 nplurals: 2,
 pluraleq: "n!=1"
-}) : this.src = q = D.require("29").cast(q);
+}) : this.src = q = D.require("28").cast(q);
 return q;
 };
 r.each = function(q) {
@@ -4300,14 +4291,14 @@ r.del = function(q) {
 q = this.indexOf(q);
 if (-1 !== q) {
 const t = this.rows.cut(q, 1);
-if (t && t.length) return this.length = this.rows.length, this.rows.each(function(e, b, k) {
-b.idx = k;
+if (t && t.length) return this.length = this.rows.length, this.rows.each(function(e, b, h) {
+b.idx = h;
 }), q;
 }
 };
 r.reIndex = function(q, t) {
-const e = q.hash(), b = this.indexOf(q), k = this.rows.indexOf(e);
-return k === b ? b : -1 !== k ? (t = (t || 0) + 1, q.source("Error, duplicate " + String(t) + ": " + q.source()), 
+const e = q.hash(), b = this.indexOf(q), h = this.rows.indexOf(e);
+return h === b ? b : -1 !== h ? (t = (t || 0) + 1, q.source("Error, duplicate " + String(t) + ": " + q.source()), 
 this.reIndex(q, t)) : this.rows.key(b, e);
 };
 r.sort = function(q) {
@@ -4315,34 +4306,34 @@ this.rows.sort(q);
 return this;
 };
 r.export = function() {
-const q = this.rows, t = q.length, e = D.require("2c").init();
+const q = this.rows, t = q.length, e = D.require("2b").init();
 let b = -1;
 for (;++b < t; ) e.push(q[b]);
 return e;
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("22", function(w, r, F) {
-function y(e, b, k) {
-if (null == k) return e[b] || "";
-e[b] = k || "";
+function y(e, b, h) {
+if (null == h) return e[b] || "";
+e[b] = h || "";
 return e;
 }
 function q() {
 this._id = this.id = "";
 }
 function t(e, b) {
-const k = e.length;
+const h = e.length;
 let g = -1;
-for (;++g < k; ) b(g, e[g]);
+for (;++g < h; ) b(g, e[g]);
 }
 w.extend = function(e) {
 return e.prototype = new q();
 };
 r = q.prototype;
 r.flag = function(e, b) {
-const k = this.flg || (this.flg = []);
-if (null != b) k[b] = e; else for (b = Math.max(k.length, this.src.length, this.msg.length); 0 !== b--; ) k[b] = e;
+const h = this.flg || (this.flg = []);
+if (null != b) h[b] = e; else for (b = Math.max(h.length, this.src.length, this.msg.length); 0 !== b--; ) h[b] = e;
 return this;
 };
 r.flagged = function(e) {
@@ -4358,24 +4349,24 @@ r.isFlag = function(e) {
 return 0 < e;
 };
 r.flags = function() {
-const e = {}, b = [], k = this.flg || [];
-let g = k.length;
+const e = {}, b = [], h = this.flg || [];
+let g = h.length;
 for (;0 !== g--; ) {
-const h = k[g];
-e[h] || (e[h] = !0, b.push(h));
+const k = h[g];
+e[k] || (e[k] = !0, b.push(k));
 }
 return b;
 };
 r.flaggedAs = function(e, b) {
-const k = this.flg || [];
-if (null != b) return e === k[b] || 0;
-for (b = k.length; 0 !== b--; ) if (k[b] === e) return !0;
+const h = this.flg || [];
+if (null != b) return e === h[b] || 0;
+for (b = h.length; 0 !== b--; ) if (h[b] === e) return !0;
 return !1;
 };
 r.fuzzy = function(e, b) {
-const k = this.flaggedAs(4, e);
+const h = this.flaggedAs(4, e);
 null != b && this.flag(b ? 4 : 0, e);
-return k;
+return h;
 };
 r.source = function(e, b) {
 if (null == e) return this.src[b || 0] || "";
@@ -4394,9 +4385,9 @@ r.targetForms = function() {
 return this.msgF;
 };
 r.each = function(e) {
-const b = this.src, k = this.msg, g = Math.max(b.length, k.length);
-let h = -1;
-for (;++h < g; ) e(h, b[h], k[h]);
+const b = this.src, h = this.msg, g = Math.max(b.length, h.length);
+let k = -1;
+for (;++k < g; ) e(k, b[k], h[k]);
 return this;
 };
 r.eachSrc = function(e) {
@@ -4419,8 +4410,8 @@ return this;
 };
 r.untranslate = function(e) {
 if (null != e) this.msg[e] = ""; else {
-const b = this.msg, k = b.length;
-for (e = 0; e < k; e++) b[e] = "";
+const b = this.msg, h = b.length;
+for (e = 0; e < h; e++) b[e] = "";
 }
 return this;
 };
@@ -4435,14 +4426,14 @@ return null == this.err;
 };
 r.translated = function(e) {
 if (null != e) return !!this.msg[e];
-const b = this.msg, k = b.length;
-for (e = 0; e < k; e++) if (!b[e]) return !1;
+const b = this.msg, h = b.length;
+for (e = 0; e < h; e++) if (!b[e]) return !1;
 return !0;
 };
 r.untranslated = function(e) {
 if (null != e) return !this.msg[e];
-const b = this.msg, k = b.length;
-for (e = 0; e < k; e++) if (b[e]) return !1;
+const b = this.msg, h = b.length;
+for (e = 0; e < h; e++) if (b[e]) return !1;
 return !0;
 };
 r.comment = function(e) {
@@ -4516,7 +4507,7 @@ this.htm = e;
 };
 r = null;
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("f", function(w, r, F) {
 function y(g) {
 return {
@@ -4533,14 +4524,14 @@ Language: "",
 "Content-Transfer-Encoding": "8bit"
 };
 }
-function q(g, h) {
+function q(g, k) {
 g = g || "";
-h && (g += "\0" + h);
+k && (g += "\0" + k);
 return g;
 }
 function t(g) {
-const h = r.console;
-h && h.error && h.error(g.message || String(g));
+const k = r.console;
+k && k.error && k.error(g.message || String(g));
 }
 function e(g) {
 return D.require("20").create(g);
@@ -4550,9 +4541,9 @@ this.locale(g);
 this.clear();
 this.head = y(this.now());
 }
-function k(g, h) {
+function h(g, k) {
 this.src = [ g || "" ];
-this.msg = [ h || "" ];
+this.msg = [ k || "" ];
 }
 w.create = function(g) {
 return new b(g);
@@ -4568,19 +4559,19 @@ function g(f, a) {
 for (f = String(f); f.length < a; ) f = "0" + f;
 return f;
 }
-var h = new Date();
-const m = h.getUTCFullYear(), p = h.getUTCMonth() + 1, x = h.getUTCDate(), v = h.getUTCHours();
-h = h.getUTCMinutes();
-return g(m, 4) + "-" + g(p, 2) + "-" + g(x, 2) + " " + g(v, 2) + ":" + g(h, 2) + "+0000";
+var k = new Date();
+const m = k.getUTCFullYear(), p = k.getUTCMonth() + 1, x = k.getUTCDate(), v = k.getUTCHours();
+k = k.getUTCMinutes();
+return g(m, 4) + "-" + g(p, 2) + "-" + g(x, 2) + " " + g(v, 2) + ":" + g(k, 2) + "+0000";
 };
-F.header = function(g, h) {
+F.header = function(g, k) {
 const m = this.head || (this.head = {});
-if (null == h) return this.headers()[g] || "";
-m[g] = h || "";
+if (null == k) return this.headers()[g] || "";
+m[g] = k || "";
 return this;
 };
 F.headers = function(g) {
-const h = this.now(), m = this.head || (this.head = y(h));
+const k = this.now(), m = this.head || (this.head = y(k));
 if (null != g) {
 for (x in g) m[x] = g[x];
 return this;
@@ -4595,34 +4586,34 @@ g["Plural-Forms"] = "nplurals=" + (p.nplurals || "2") + "; plural=" + (p.plurale
 var x = "PO-Revision-Date";
 } else g.Language = "", g["Plural-Forms"] = "nplurals=INTEGER; plural=EXPRESSION;", 
 g["PO-Revision-Date"] = "YEAR-MO-DA HO:MI+ZONE", x = "POT-Creation-Date";
-g[x] || (g[x] = h);
+g[x] || (g[x] = k);
 g["X-Generator"] = "Loco https://localise.biz/";
 return g;
 };
-F.get = function(g, h) {
-g = q(g, h);
+F.get = function(g, k) {
+g = q(g, k);
 return this.rows.get(g);
 };
-F.add = function(g, h) {
-g instanceof k || (g = new k(g));
-h && g.context(h);
-h = g.hash();
-this.rows.get(h) ? t("Duplicate message at index " + this.indexOf(g)) : (g.idx = this.rows.add(h, g), 
+F.add = function(g, k) {
+g instanceof h || (g = new h(g));
+k && g.context(k);
+k = g.hash();
+this.rows.get(k) ? t("Duplicate message at index " + this.indexOf(g)) : (g.idx = this.rows.add(k, g), 
 this.length = this.rows.length);
 return g;
 };
 F.load = function(g) {
-let h = -1, m, p;
+let k = -1, m, p;
 var x;
 let v, f, a, c = (x = this.locale()) && x.nplurals || 2, d = [];
-for (;++h < g.length; ) m = g[h], null == m.parent ? (p = m.source || m.id, x = m.target || "", 
-v = m.context, p || v ? (f = new k(p, x), f._id = m._id, v && f.context(v), m.flag && f.flag(m.flag, 0), 
+for (;++k < g.length; ) m = g[k], null == m.parent ? (p = m.source || m.id, x = m.target || "", 
+v = m.context, p || v ? (f = new h(p, x), f._id = m._id, v && f.context(v), m.flag && f.flag(m.flag, 0), 
 m.comment && f.comment(m.comment), m.notes && f.notes(m.notes), m.refs && f.refs(m.refs), 
 f.format(m.format), m.message = f, this.add(f), m.prev && m.prev[0] && (f.prev(m.prev[0].source, m.prev[0].context), 
-m.prev[1] && f._src.push(m.prev[1].source || ""))) : 0 === h && "object" === typeof x && (this.head = x, 
+m.prev[1] && f._src.push(m.prev[1].source || ""))) : 0 === k && "object" === typeof x && (this.head = x, 
 this.headcmt = m.comment)) : d.push(m);
-for (h = -1; ++h < d.length; ) try {
-m = d[h];
+for (k = -1; ++k < d.length; ) try {
+m = d[k];
 p = m.source || m.id;
 f = g[m.parent] && g[m.parent].message;
 if (!f) throw Error("parent missing for plural " + p);
@@ -4639,10 +4630,10 @@ this.fmtr = e(g);
 return this;
 };
 F.toString = function() {
-var g, h = this.locale(), m = [], p = [], x = this.headers(), v = !h, f = h && h.nplurals || 2, a = this.fmtr || e();
-x[h ? "PO-Revision-Date" : "POT-Creation-Date"] = this.now();
+var g, k = this.locale(), m = [], p = [], x = this.headers(), v = !k, f = k && k.nplurals || 2, a = this.fmtr || e();
+x[k ? "PO-Revision-Date" : "POT-Creation-Date"] = this.now();
 for (g in x) p.push(g + ": " + x[g]);
-p = new k("", p.join("\n"));
+p = new h("", p.join("\n"));
 p.comment(this.headcmt || "");
 v && p.fuzzy(0, !0);
 m.push(p.toString());
@@ -4652,16 +4643,16 @@ c && (m.push(d.cat(a, v, f)), m.push(""));
 });
 return m.join("\n");
 };
-F = D.require("22").extend(k);
+F = D.require("22").extend(h);
 F.msgid = function() {
 return this.src[0];
 };
 F.msgidPlural = function() {
 return this.src[1] || "";
 };
-F.prev = function(g, h) {
+F.prev = function(g, k) {
 this._src = [ g || "" ];
-this._ctx = h;
+this._ctx = k;
 };
 F.hash = function() {
 return q(this.source(), this.context());
@@ -4669,28 +4660,28 @@ return q(this.source(), this.context());
 F.toString = function() {
 return this.cat(e());
 };
-F.cat = function(g, h, m) {
+F.cat = function(g, k, m) {
 var p = [], x;
 (x = this.cmt) && p.push(g.prefix(x, "# "));
 (x = this.xcmt) && p.push(g.prefix(x, "#. "));
 var v = this.rf;
 if (x = this._id) v += (v ? " " : "") + "loco:" + x;
 v && /\S/.test(v) && p.push(g.refs(v));
-!h && this.fuzzy() && p.push("#, fuzzy");
+!k && this.fuzzy() && p.push("#, fuzzy");
 (x = this.fmt) && p.push("#, " + x + "-format");
 (x = this._ctx) && p.push(g.prefix(g.pair("msgctxt", x), "#| "));
 if (x = this._src) x[0] && p.push(g.prefix(g.pair("msgid", x[0]), "#| ")), x[1] && p.push(g.prefix(g.pair("msgid_plural", x[1]), "#| "));
 (x = this.ctx) && p.push(g.pair("msgctxt", x));
 p.push(g.pair("msgid", this.src[0]));
-if (null == this.src[1]) p.push(g.pair("msgstr", h ? "" : this.msg[0])); else for (v = -1, 
-p.push(g.pair("msgid_plural", this.src[1])), x = this.msg || [ "", "" ], m = m || x.length; ++v < m; ) p.push(g.pair("msgstr[" + v + "]", h ? "" : x[v] || ""));
+if (null == this.src[1]) p.push(g.pair("msgstr", k ? "" : this.msg[0])); else for (v = -1, 
+p.push(g.pair("msgid_plural", this.src[1])), x = this.msg || [ "", "" ], m = m || x.length; ++v < m; ) p.push(g.pair("msgstr[" + v + "]", k ? "" : x[v] || ""));
 return p.join("\n");
 };
-F.compare = function(g, h) {
+F.compare = function(g, k) {
 let m = this.weight(), p = g.weight();
 if (m > p) return 1;
 if (m < p) return -1;
-if (h) {
+if (k) {
 m = this.hash().toLowerCase();
 p = g.hash().toLowerCase();
 if (m < p) return 1;
@@ -4699,13 +4690,13 @@ if (m > p) return -1;
 return 0;
 };
 F.copy = function() {
-let g = new k(), h, m;
-for (h in this) this.hasOwnProperty(h) && ((m = this[h]) && m.concat && (m = m.concat()), 
-g[h] = m);
+let g = new h(), k, m;
+for (k in this) this.hasOwnProperty(k) && ((m = this[k]) && m.concat && (m = m.concat()), 
+g[k] = m);
 return g;
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("11", function(w, r, F) {
 w.init = function(y, q) {
 function t() {
@@ -4718,58 +4709,58 @@ resizable: !1,
 height: 500
 }));
 }
-function e(h, m, p) {
-h = B("<p></p>").text(p);
-t().dialog("close").html("").dialog("option", "title", "Error").append(h).dialog("open");
+function e(k, m, p) {
+k = B("<p></p>").text(p);
+t().dialog("close").html("").dialog("option", "title", "Error").append(k).dialog("open");
 }
-function b(h) {
-const m = h && h.code;
+function b(k) {
+const m = k && k.code;
 if (m) {
-for (var p = m.length, x = B("<ol></ol>").attr("class", h.type), v = -1; ++v < p; ) B("<li></li>").html(m[v]).appendTo(x);
-0 !== h.line && x.find("li").eq(h.line - 1).attr("class", "highlighted");
-t().dialog("close").html("").dialog("option", "title", h.path + ":" + h.line).append(x).dialog("open");
+for (var p = m.length, x = B("<ol></ol>").attr("class", k.type), v = -1; ++v < p; ) B("<li></li>").html(m[v]).appendTo(x);
+0 !== k.line && x.find("li").eq(k.line - 1).attr("class", "highlighted");
+t().dialog("close").html("").dialog("option", "title", k.path + ":" + k.line).append(x).dialog("open");
 }
 }
-function k(h) {
-h = h.target;
-const m = B(h).find("li.highlighted")[0];
-h.scrollTop = Math.max(0, (m && m.offsetTop || 0) - Math.floor(h.clientHeight / 2));
+function h(k) {
+k = k.target;
+const m = B(k).find("li.highlighted")[0];
+k.scrollTop = Math.max(0, (m && m.offsetTop || 0) - Math.floor(k.clientHeight / 2));
 }
 let g;
 return {
-load: function(h) {
-t().html('<div class="loco-loading"></div>').dialog("option", "title", "Loading..").off("dialogopen").dialog("open").on("dialogopen", k);
-h = B.extend({
-ref: h,
+load: function(k) {
+t().html('<div class="loco-loading"></div>').dialog("option", "title", "Loading..").off("dialogopen").dialog("open").on("dialogopen", h);
+k = B.extend({
+ref: k,
 path: q.popath
 }, q.project || {});
-y.ajax.post("fsReference", h, b, e);
+y.ajax.post("fsReference", k, b, e);
 }
 };
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("12", function(w, r, F) {
 function y() {
 this.inf = {};
 }
 function q() {
-const b = F.createElement("p"), k = /&(#\d+|#x[0-9a-f]|[a-z]+);/i, g = /<[a-z]+\s/i;
-let h, m;
+const b = F.createElement("p"), h = /&(#\d+|#x[0-9a-f]|[a-z]+);/i, g = /<[a-z]+\s/i;
+let k, m;
 return {
 sniff: function(p) {
-if (p === h) return m;
-h = p;
-if (k.test(p) || g.test(p)) if (b.innerHTML = p, b.textContent !== p) return m = !0;
+if (p === k) return m;
+k = p;
+if (h.test(p) || g.test(p)) if (b.innerHTML = p, b.textContent !== p) return m = !0;
 return m = !1;
 }
 };
 }
-w.create = function(b, k) {
-k && "function" === typeof k.create || console.error("module.create is not callable");
-k = k.create(y);
-k.init(b);
-return k;
+w.create = function(b, h) {
+h && "function" === typeof h.create || console.error("module.create is not callable");
+h = h.create(y);
+h.init(b);
+return h;
 };
 const t = y.prototype;
 t.init = function(b) {
@@ -4798,14 +4789,14 @@ t.setSrc = function(b) {
 this.inf.src = this.mapLang(b, this.getLangMap());
 };
 t.stderr = function(b) {
-const k = (r.loco || {}).notices;
-k && k.error && k.error(String(this) + ": " + String(b));
+const h = (r.loco || {}).notices;
+h && h.error && h.error(String(this) + ": " + String(b));
 };
-t.xhrError = function(b, k, g) {
+t.xhrError = function(b, h, g) {
 try {
-const h = b.responseText, m = h && r.JSON.parse(h);
+const k = b.responseText, m = k && r.JSON.parse(k);
 g = m && this.parseError(m) || g;
-} catch (h) {}
+} catch (k) {}
 return g || this.httpError(b);
 };
 t.httpError = function(b) {
@@ -4814,17 +4805,17 @@ return (b = b && b.status) && 200 !== b ? "Responded status " + b : "Unknown err
 t.parseError = function(b) {
 return b && b.error || "";
 };
-t.mapLang = function(b, k) {
+t.mapLang = function(b, h) {
 const g = String(b).replace("_", "-").toLowerCase();
-var h = b.lang;
-k = k[g] || k[h] || [];
-b = k.length;
-if (0 === b) return h;
-if (1 < b) for (h = -1; ++h < b; ) {
-const m = k[h];
+var k = b.lang;
+h = h[g] || h[k] || [];
+b = h.length;
+if (0 === b) return k;
+if (1 < b) for (k = -1; ++k < b; ) {
+const m = h[k];
 if (m === g) return m;
 }
-return k[0];
+return h[0];
 };
 t.getLangMap = function() {
 return {};
@@ -4837,12 +4828,12 @@ b = b.split("://", 2);
 1 === b.length && b.unshift("https");
 return b[0] + "://" + b[1].replace(/\/{2,}/g, "/");
 };
-t.translate = function(b, k, g) {
-return this.batch([ b ], k, this.isHtml(b.source), g);
+t.translate = function(b, h, g) {
+return this.batch([ b ], h, this.isHtml(b.source), g);
 };
-t.unwind = function(b, k) {
-const g = [], h = b.length;
-for (let m = 0; m < h; m++) g.push(b[m][k]);
+t.unwind = function(b, h) {
+const g = [], k = b.length;
+for (let m = 0; m < k; m++) g.push(b[m][h]);
 return g;
 };
 t.contextualize = function(b) {
@@ -4858,7 +4849,7 @@ lang: "fr",
 toString: function() {
 return "fr";
 }
-}, function(k, g) {
+}, function(h, g) {
 b(!!g);
 });
 };
@@ -4866,21 +4857,21 @@ t.hash = function() {
 return this.key();
 };
 t._call = function(b) {
-const k = this;
-k.state = null;
+const h = this;
+h.state = null;
 b.cache = !0;
 b.dataType = "json";
-b.error = function(g, h, m) {
-k.stderr(k.xhrError(g, h, m));
+b.error = function(g, k, m) {
+h.stderr(h.xhrError(g, k, m));
 };
-return k.abortable(B.ajax(b));
+return h.abortable(B.ajax(b));
 };
 t.abortable = function(b) {
-const k = this;
+const h = this;
 b.always(function() {
-k.$r === b && (k.$r = null);
+h.$r === b && (h.$r = null);
 });
-return k.$r = b;
+return h.$r = b;
 };
 t.abort = function() {
 const b = this.$r;
@@ -4891,7 +4882,7 @@ return (e || (e = q())).sniff(b);
 };
 let e;
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("13", function(w, r, F) {
 function y(q) {
 this.api = q;
@@ -4904,13 +4895,13 @@ r = y.prototype;
 r.init = function(q, t) {
 function e(c) {
 let d = {
-id: k.length,
+id: h.length,
 length: 0,
 html: c.html,
 items: []
 };
-k.push(d);
-return h[c.html ? 1 : 0] = d;
+h.push(d);
+return k[c.html ? 1 : 0] = d;
 }
 function b(c, d, l) {
 var n = c.source(null, l);
@@ -4925,7 +4916,7 @@ source: n,
 context: C,
 notes: l
 };
-l = h[u ? 1 : 0];
+l = k[u ? 1 : 0];
 u = l.items;
 if (f && c > f) x++, c = void 0; else {
 if (l.length + c > v || 50 === u.length) l = e(l), u = l.items;
@@ -4939,8 +4930,8 @@ c = n;
 c && (c.id = d);
 }
 }
-const k = [], g = this.api;
-let h = [], m = 0, p = 0, x = 0, v = 1e4, f = g.maxChr();
+const h = [], g = this.api;
+let k = [], m = 0, p = 0, x = 0, v = 1e4, f = g.maxChr();
 f && (v = Math.min(v, f));
 e({
 html: !1
@@ -4955,10 +4946,10 @@ b(d, l, 1);
 } : function(c, d, l) {
 b(d, l, 0);
 });
-h = [];
+k = [];
 this.chars = m;
 this.length = p;
-this.batches = k;
+this.batches = h;
 this.locale = a;
 x && g.stderr("Strings over " + v + " characters long will be skipped");
 };
@@ -4988,21 +4979,21 @@ return !0;
 function b() {
 return "abort" === x.state ? (v && (v.abort(), m()), !1) : !0;
 }
-function k() {
+function h() {
 const z = f.shift();
 if (z) {
 const A = z.items;
-A && A.length ? v.batch(A, a, z.html, e(A)).fail(g).always(h) : h();
+A && A.length ? v.batch(A, a, z.html, e(A)).fail(g).always(k) : k();
 } else m();
 }
 function g() {
 x.abort();
 m();
 }
-function h() {
+function k() {
 d++;
 p("prog", [ d, u ]);
-b() && k();
+b() && h();
 }
 function m() {
 v = f = null;
@@ -5019,7 +5010,7 @@ each: [],
 prog: []
 };
 x.state = "";
-k();
+h();
 return {
 done: function(z) {
 C.done.push(z);
@@ -5046,16 +5037,16 @@ return c;
 };
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("14", function(w, r, F) {
 function y() {}
 w.create = function(q) {
-(y.prototype = new q()).batch = function(t, e, b, k) {
+(y.prototype = new q()).batch = function(t, e, b, h) {
 function g(x) {
 let v = -1;
-for (;++v < m && !1 !== k(v, x[v], e); );
+for (;++v < m && !1 !== h(v, x[v], e); );
 }
-const h = r.loco, m = t.length;
+const k = r.loco, m = t.length;
 t = {
 hook: this.getId(),
 type: b ? "html" : "text",
@@ -5064,7 +5055,7 @@ source: this.getSrc(),
 sources: t
 };
 const p = B.Deferred();
-this.abortable(h.ajax.post("apis", t, function(x) {
+this.abortable(k.ajax.post("apis", t, function(x) {
 g(x && x.targets || []);
 p.resolve();
 }, function() {
@@ -5076,7 +5067,7 @@ return p.promise();
 return new y();
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("24", {
 bel: [ "be" ],
 zh: [ "zh", "zh-cn", "zh-tw" ],
@@ -5092,9 +5083,9 @@ return "Google Translate";
 };
 q.parseError = function(t) {
 if (t.error) {
-const e = [], b = t.error.errors || [], k = b.length;
+const e = [], b = t.error.errors || [], h = b.length;
 let g = -1;
-for (;++g < k; ) e.push(b[g].message || "");
+for (;++g < h; ) e.push(b[g].message || "");
 return "Error " + t.error.code + ": " + e.join(";");
 }
 return "";
@@ -5102,25 +5093,25 @@ return "";
 q.getLangMap = function() {
 return D.require("24");
 };
-q.batch = function(t, e, b, k) {
+q.batch = function(t, e, b, h) {
 function g(v) {
 const f = x.length;
 let a = -1;
-for (;++a < f && !1 !== k(a, (v[a] || {}).translatedText || "", e); );
+for (;++a < f && !1 !== h(a, (v[a] || {}).translatedText || "", e); );
 }
-const h = this, m = h.getSrc();
+const k = this, m = k.getSrc();
 b = b ? "html" : "text";
-const p = h.mapLang(e, h.getLangMap()), x = this.unwind(t, "source");
-return h._call({
+const p = k.mapLang(e, k.getLangMap()), x = this.unwind(t, "source");
+return k._call({
 url: "https://translation.googleapis.com/language/translate/v2?source=" + m + "&target=" + p + "&format=" + b,
 method: "POST",
 traditional: !0,
 data: {
-key: h.key(),
+key: k.key(),
 q: x
 }
 }).done(function(v, f, a) {
-v.data ? g(v.data.translations || []) : (h.stderr(h.parseError(v) || h.httpError(a)), 
+v.data ? g(v.data.translations || []) : (k.stderr(k.parseError(v) || k.httpError(a)), 
 g([]));
 }).fail(function() {
 g([]);
@@ -5129,7 +5120,7 @@ g([]);
 return new y();
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("25", {
 zh: [ "zh", "zh-cn", "zh-tw" ],
 pt: [ "pt", "pt-pt", "pt-br" ]
@@ -5142,9 +5133,9 @@ q.parseError = function(t) {
 var e = t.details || {};
 let b = e.message;
 e = e.texts;
-return b ? (e && e !== b && (b += "; " + e), b = b.replace(/https?:\/\/(?:[a-z]+\.)?lecto.ai[-\w\/?&=%.+~]*/, function(k) {
-k += -1 === k.indexOf("?") ? "?" : "&";
-return k + "ref=loco";
+return b ? (e && e !== b && (b += "; " + e), b = b.replace(/https?:\/\/(?:[a-z]+\.)?lecto.ai[-\w\/?&=%.+~]*/, function(h) {
+h += -1 === h.indexOf("?") ? "?" : "&";
+return h + "ref=loco";
 }), "Error " + (t.status || "0") + ": " + b) : "";
 };
 q.maxChr = function() {
@@ -5153,19 +5144,19 @@ return 1e3;
 q.getLangMap = function() {
 return D.require("25");
 };
-q.batch = function(t, e, b, k) {
+q.batch = function(t, e, b, h) {
 function g(v) {
 const f = x.length;
 let a = -1, c = (v[0] || {
 translated: []
 }).translated || [];
-for (;++a < f && (v = c[a] || "", !1 !== k(a, v, e)); );
+for (;++a < f && (v = c[a] || "", !1 !== h(a, v, e)); );
 }
-const h = this;
+const k = this;
 b = this.getSrc();
-const m = h.param("api") || "https://api.lecto.ai", p = h.mapLang(e, h.getLangMap()), x = this.unwind(t, "source");
-return h._call({
-url: h.fixURL(m + "/v1/translate/text"),
+const m = k.param("api") || "https://api.lecto.ai", p = k.mapLang(e, k.getLangMap()), x = this.unwind(t, "source");
+return k._call({
+url: k.fixURL(m + "/v1/translate/text"),
 method: "POST",
 data: JSON.stringify({
 to: [ p ],
@@ -5174,11 +5165,11 @@ texts: x
 }),
 headers: {
 "Content-Type": "application/json; charset=UTF-8",
-"X-API-Key": h.key(),
+"X-API-Key": k.key(),
 Accept: "application/json"
 }
 }).done(function(v, f, a) {
-v ? g(v.translations || []) : (h.stderr(h.parseError(v) || h.httpError(a)), g([]));
+v ? g(v.translations || []) : (k.stderr(k.parseError(v) || k.httpError(a)), g([]));
 }).fail(function() {
 g([]);
 });
@@ -5186,7 +5177,7 @@ g([]);
 return new y();
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("26", {
 bel: [ "be" ],
 nn: [ "no" ],
@@ -5222,31 +5213,31 @@ return this.param("region") || "global";
 q.hash = function() {
 return this.key() + this.region();
 };
-q.batch = function(t, e, b, k) {
+q.batch = function(t, e, b, h) {
 function g(a) {
 let c = -1;
 for (var d; ++c < x && (d = a[c] || {}, d = d.translations || [], d = d[0] || {}, 
-!1 !== k(c, d.text || "", e)); );
+!1 !== h(c, d.text || "", e)); );
 }
-let h = this, m = [], p = h.getSrc();
+let k = this, m = [], p = k.getSrc();
 t = this.unwind(t, "source");
 let x = t.length, v = -1;
 b = b ? "html" : "plain";
-let f = h.mapLang(e, h.getLangMap());
+let f = k.mapLang(e, k.getLangMap());
 for (;++v < x; ) m.push({
 Text: t[v]
 });
-return h._call({
+return k._call({
 url: "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=" + p + "&to=" + f + "&textType=" + b,
 method: "POST",
 data: JSON.stringify(m),
 headers: {
 "Content-Type": "application/json; charset=UTF-8",
 "Ocp-Apim-Subscription-Key": this.key(),
-"Ocp-Apim-Subscription-Region": h.region()
+"Ocp-Apim-Subscription-Region": k.region()
 }
 }).done(function(a, c, d) {
-a && a.length ? g(a) : (h.stderr(h.parseError(a) || h.httpError(d)), g([]));
+a && a.length ? g(a) : (k.stderr(k.parseError(a) || k.httpError(d)), g([]));
 }).fail(function() {
 g([]);
 });
@@ -5254,7 +5245,7 @@ g([]);
 return new y();
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("18", function(w, r, F) {
 w.init = function(y) {
 function q() {
@@ -5291,7 +5282,7 @@ B(y).find('input[type="submit"]').attr("disabled", !0);
 f && f(!1);
 return !1;
 }
-function k(I) {
+function h(I) {
 var Q, X = R || {};
 for (Q in X) if (X.hasOwnProperty(Q)) {
 var Z = X[Q];
@@ -5305,7 +5296,7 @@ v(I);
 d = !0;
 return !1;
 }
-function h(I) {
+function k(I) {
 I.preventDefault();
 O.dialog("close");
 return !1;
@@ -5321,12 +5312,12 @@ c = I.method;
 B(a).find("span.loco-msg").text(I.message || "Something went wrong.");
 J = I.warning || "";
 I.notice && n.notices.info(I.notice);
-if (l) "direct" !== c && (R = I.creds, k(y), d && I.success && n.notices.success(I.success)), 
+if (l) "direct" !== c && (R = I.creds, h(y), d && I.success && n.notices.success(I.success)), 
 b(); else if (I.reason) n.notices.info(I.reason); else if (I = I.prompt) {
 var Q = q();
 Q.html(I).find("form").on("submit", g);
 Q.dialog("option", "title", Q.find("h2").remove().text());
-Q.find("button.cancel-button").show().on("click", h);
+Q.find("button.cancel-button").show().on("click", k);
 Q.find('input[type="submit"]').addClass("button-primary");
 b();
 B(r).triggerHandler("resize");
@@ -5353,7 +5344,7 @@ auth: C
 b();
 return {
 applyCreds: function(I) {
-if (I.nodeType) k(I); else {
+if (I.nodeType) h(I); else {
 var Q, X = R || {};
 for (Q in X) X.hasOwnProperty(Q) && (I[Q] = X[Q]);
 }
@@ -5362,7 +5353,7 @@ return this;
 setForm: function(I) {
 y = I;
 b();
-k(I);
+h(I);
 return this;
 },
 connect: function() {
@@ -5382,38 +5373,38 @@ return l;
 };
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("27", function(w, r, F) {
-function y(b, k) {
+function y(b, h) {
 return function(g) {
-b.apply(g, k);
+b.apply(g, h);
 return g;
 };
 }
 function q(b) {
-return function(k, g) {
-k = k && k[b] || 0;
+return function(h, g) {
+h = h && h[b] || 0;
 g = g && g[b] || 0;
-return k === g ? 0 : k > g ? 1 : -1;
+return h === g ? 0 : h > g ? 1 : -1;
 };
 }
 function t(b) {
-return function(k, g) {
-return (k && k[b] || "").localeCompare(g && g[b] || "");
+return function(h, g) {
+return (h && h[b] || "").localeCompare(g && g[b] || "");
 };
 }
 function e(b) {
-return function(k, g) {
-return -1 * b(k, g);
+return function(h, g) {
+return -1 * b(h, g);
 };
 }
-w.sort = function(b, k, g, h) {
-k = "n" === g ? q(k) : t(k);
-h && (k = e(k));
-return y([].sort, [ k ])(b);
+w.sort = function(b, h, g, k) {
+h = "n" === g ? q(h) : t(h);
+k && (h = e(h));
+return y([].sort, [ h ])(b);
 };
 return w;
-}({}, K, M));
+}({}, L, M));
 D.register("19", function(w, r, F) {
 w.init = function(y) {
 function q(a) {
@@ -5422,12 +5413,12 @@ const d = a.length;
 for (B("tr", p).remove(); ++c < d; ) p.appendChild(a[c].$);
 }
 function t(a) {
-b = a ? v.find(a, h) : h.slice(0);
+b = a ? v.find(a, k) : k.slice(0);
 g && (a = m[g], b = f(b, g, a.type, a.desc));
 q(b);
 }
-let e = 0, b, k, g;
-const h = [], m = [], p = y.getElementsByTagName("tbody")[0];
+let e = 0, b, h, g;
+const k = [], m = [], p = y.getElementsByTagName("tbody")[0];
 var x = y.getElementsByTagName("thead")[0];
 const v = D.require("a").init(), f = D.require("27").sort;
 y = B('form.loco-filter input[type="text"]', y.parentNode);
@@ -5438,10 +5429,10 @@ l.preventDefault();
 {
 l = a;
 let n = m[l], u = n.type, C = !(n.desc = !n.desc);
-b = f(b || h.slice(0), l, u, C);
+b = f(b || k.slice(0), l, u, C);
 q(b);
-k && k.removeClass("loco-desc loco-asc");
-k = B(n.$).addClass(C ? "loco-desc" : "loco-asc").removeClass(C ? "loco-asc" : "loco-desc");
+h && h.removeClass("loco-desc loco-asc");
+h = B(n.$).addClass(C ? "loco-desc" : "loco-asc").removeClass(C ? "loco-asc" : "loco-desc");
 g = l;
 }
 return !1;
@@ -5466,21 +5457,21 @@ c = Number(c);
 }
 n[d] = c;
 }
-h[a] = n;
+k[a] = n;
 v.index(a, l);
 });
-y.length && (x = y[0], y = B(x.form), 1 < h.length ? D.require("b").listen(x, t) : y.hide(), 
+y.length && (x = y[0], y = B(x.form), 1 < k.length ? D.require("b").listen(x, t) : y.hide(), 
 y.on("submit", function(a) {
 a.preventDefault();
 return !1;
 }));
 };
 return w;
-}({}, K, M));
-const T = K.loco || {}, ja = T.conf || {
+}({}, L, M));
+const T = L.loco || {}, ja = T.conf || {
 $v: []
 };
-K = D.require("1").init();
+L = D.require("1").init();
 M = ja.wplang;
 T.version = function(w) {
 return ja.$v[w || 0] || "0";
@@ -5489,12 +5480,12 @@ D.require("2");
 D.require("3");
 D.require("4");
 D.require("5");
-T.l10n = K;
-K.load(ja.wpl10n);
-M && K.pluraleq(M.pluraleq);
+T.l10n = L;
+L.load(ja.wpl10n);
+M && L.pluraleq(M.pluraleq);
 T.string = D.require("6");
-T.notices = D.require("7").init(K);
-T.ajax = D.require("8").init(ja).localise(K);
+T.notices = D.require("7").init(L);
+T.ajax = D.require("8").init(ja).localise(L);
 T.locale = D.require("9");
 T.fulltext = D.require("a");
 T.watchtext = D.require("b").listen;
@@ -5522,7 +5513,7 @@ D.require("19").init(r);
 });
 T.validate = function(w) {
 w = (w = /^\d+\.\d+\.\d+/.exec(w && w[0] || "")) && w[0];
-if ("2.8.7" === w) return !0;
+if ("2.8.8" === w) return !0;
 T.notices.warn("admin.js is the wrong version (" + w + "). Please empty all relevant caches and reload this page.");
 return !1;
 };

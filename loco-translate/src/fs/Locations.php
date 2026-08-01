@@ -126,7 +126,7 @@ class Loco_fs_Locations extends ArrayObject {
 
 
     /**
-     * Get a locations collection from the fs_basedir plugin setting.s
+     * Get a locations collection from the fs_basedir plugin setting.
      * Absolute paths are used as-is; relative paths are resolved against ABSPATH.
      */
     public static function getBaseDirs():self{
