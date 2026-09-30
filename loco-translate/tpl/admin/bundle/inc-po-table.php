@@ -34,7 +34,7 @@
         </thead>
         <tbody><?php
             foreach( $pairs as $po ): $lc = $po->lcode; $ispo = (bool) $lc;?> 
-            <tr>
+            <tr<?php if( $po->blocked ):?> class="loco-locked"<?php endif?>>
                 <td class="has-row-actions" data-sort-value="<?php $po->e('lname')?>">
                     <a href="<?php $po->e('edit')?>" class="row-title"><?php
                         if( $ispo ):?> 
@@ -92,7 +92,7 @@
                 endif?> 
 
                 <td data-sort-value="<?php $po->e('name')?>">
-                     <a href="<?php $po->e('info')?>"><?php $po->e('name')?></a>
+                    <a href="<?php $po->e('info')?>"><?php $po->e('name')?></a>
                 </td>
                 <td data-sort-value="<?php $po->f('time','%u')?>">
                     <time datetime="<?php $po->date('time','c')?>"><?php $po->date('time')?></time>

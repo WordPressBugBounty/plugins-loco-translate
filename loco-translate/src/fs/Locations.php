@@ -30,9 +30,14 @@ class Loco_fs_Locations extends ArrayObject {
     private static ?self $plugin = null;
 
     /**
-     * Singleton of configured base directories from settings
+     * Singleton of the configured base directory ceiling (read + write) from settings
      */
     private static ?self $jails = null;
+
+    /**
+     * Singleton of the configured writeable directories jail from settings
+     */
+    private static ?self $writes = null;
 
 
     /**
@@ -45,6 +50,7 @@ class Loco_fs_Locations extends ArrayObject {
         self::$theme = null;
         self::$plugin = null;
         self::$jails = null;
+        self::$writes = null;
     }
 
 
@@ -126,22 +132,73 @@ class Loco_fs_Locations extends ArrayObject {
 
 
     /**
-     * Get a locations collection from the fs_basedir plugin setting.
+     * Parse a line-break separated directory setting into a locations collection.
      * Absolute paths are used as-is; relative paths are resolved against ABSPATH.
+     */
+    private static function parseSetting( string $value ):self {
+        $paths = [];
+        $abspath = loco_constant('ABSPATH');
+        foreach( explode("\n", $value) as $line ){
+            $line = trim($line);
+            if( '' === $line ){
+                continue;
+            }
+            // Absolute paths (including the filesystem root "/") are used as-is; relative paths resolve against ABSPATH.
+            $paths[] = Loco_fs_File::abs($line) ?: (new Loco_fs_File($line))->normalize($abspath);
+        }
+        return new Loco_fs_Locations( $paths );
+    }
+
+
+    /**
+     * Get the base directory ceiling from the fs_basedir plugin setting. This is the absolute
+     * boundary for both reading and writing. An empty setting resolves to "." (the WordPress root),
+     * so the ceiling is never empty. Absolute paths are used as-is; relative paths resolve against ABSPATH.
      */
     public static function getBaseDirs():self{
         if( ! self::$jails ){
-            $abspath = loco_constant('ABSPATH');
-            $paths = [];
-            foreach( explode("\n", Loco_data_Settings::get()->fs_basedir) as $line ){
-                $line = trim($line);
-                if( '' !== $line ){
-                    $paths[] = (new Loco_fs_File($line))->normalize($abspath);
-                }
+            $roots = self::parseSetting( Loco_data_Settings::get()->fs_basedir );
+            // empty setting means "." which resolves to ABSPATH
+            if( 0 === $roots->count() ){
+                $roots = self::parseSetting('.');
             }
-            self::$jails = new Loco_fs_Locations( $paths );
+            self::$jails = $roots;
         }
         return self::$jails;
+    }
+
+
+    /**
+     * Get the writeable directories jail from the fs_writedir plugin setting. Writes are additionally
+     * confined to these directories, within the fs_basedir ceiling. An empty setting imposes no
+     * restriction beyond the ceiling. Absolute paths are used as-is; relative paths resolve against ABSPATH.
+     */
+    public static function getWriteDirs():self{
+        if( ! self::$writes ){
+            self::$writes = self::parseSetting( Loco_data_Settings::get()->fs_writedir );
+        }
+        return self::$writes;
+    }
+
+
+    /**
+     * Check whether a path may be READ, i.e. whether it lies within the fs_basedir ceiling.
+     */
+    public static function permittedRead( string $path ):bool {
+        return self::getBaseDirs()->check($path);
+    }
+
+
+    /**
+     * Check whether a path may be WRITTEN: it must be readable (within the fs_basedir ceiling) AND
+     * permitted by the fs_writedir jail. An empty jail imposes no restriction beyond the ceiling.
+     */
+    public static function permittedWrite( string $path ):bool {
+        if( ! self::permittedRead($path) ){
+            return false;
+        }
+        $jail = self::getWriteDirs();
+        return 0 === $jail->count() || $jail->check($path);
     }
 
 
@@ -170,7 +227,8 @@ class Loco_fs_Locations extends ArrayObject {
 
 
     /**
-     * Check if a given path begins with any of the registered ones
+     * Check if a given path begins with any of the registered ones.
+     * Note that a relative path will always return false, because self::expand will return an empty array
      * @param string $path absolute path
      * @return bool whether path matched
      */    
@@ -189,7 +247,7 @@ class Loco_fs_Locations extends ArrayObject {
     /**
      * Match location and return the relative subpath.
      * Note that exact match is returned as "." indicating self
-     * @param string $path
+     * @param string $path absolute path
      * @return string|null
      */
     public function rel( string $path ): ?string {
@@ -227,17 +285,17 @@ class Loco_fs_Locations extends ArrayObject {
 
 
     /**
-     * @param string $rel Relative 
+     * @param string $path Absolute path
      * @return string[]
      */
-    public function expand( string $rel ):array {
-        if( '' === $rel ){
+    public function expand( string $path ):array {
+        if( '' === $path ){
             //Loco_error_AdminNotices::debug('Expanding empty path to empty array');
             return [];
         }
-        $path = Loco_fs_File::abs($rel);
+        $path = Loco_fs_File::abs($path);
         if( '' === $path ){
-            //throw new InvalidArgumentException('Failed on abs('.var_export($rel,true).')');
+            //throw new InvalidArgumentException('Failed on abs('.var_export($path,true).')');
             return [];
         }
         $paths = [ trailingslashit($path) ];

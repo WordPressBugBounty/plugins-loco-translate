@@ -354,12 +354,14 @@ class Loco_package_Project {
             $source->setRecursive(true)->filterExtensions($exts);
             /* @var $file Loco_fs_File */
             foreach( $this->spaths as $file ){
-                $path = realpath( (string) $file );    
-                if( $path && is_dir($path) ){
+                $path = realpath( (string) $file );
+                // add as a search root if directory exists and is permitted
+                if( $path && is_dir($path) && Loco_fs_Locations::permittedRead($path) ){
                     $source->addRoot( $path, true );
                 }
             }
-            $this->excludeSources( $source );
+            // apply excluded paths to the finder if there are any
+            $this->excludeSources($source);
             $this->source = $source;
         }
         return $this->source;
@@ -450,6 +452,20 @@ class Loco_package_Project {
     }     
 
     
+    /**
+     * Test if a file is under this project's configured source locations, and not excluded from them
+     */
+    public function isSourceLocation( Loco_fs_File $file ):bool {
+        $path = $file->getPath();
+        $excluded = new Loco_fs_Locations( array_merge( $this->xspaths->export(), $this->xgpaths->export() ) );
+        if( $excluded->check($path) ){
+            return false;
+        }
+        $included = new Loco_fs_Locations( $this->getConfiguredSources()->export() );
+        return $included->check($path);
+    }
+
+
     /**
      * Add a path for excluding in source file search
      * @param string|Loco_fs_File $path
@@ -615,18 +631,24 @@ class Loco_package_Project {
 
 
     /**
-     * Get all extractable PHP source files found under all source paths
+     * Get all extractable PHP source files found under all configured source paths
      */
     public function findSourceFiles():Loco_fs_FileList {
+        // Start list with all files permitted to be read
+        $list = new Loco_fs_FileList;
+        foreach( $this->sfiles as $file ){
+            if( Loco_fs_Locations::permittedRead($file->getPath()) ){
+                $list->add($file);
+            }
+        }
+        // augment file list from directories
         $source = $this->getSourceFinder();
-        // augment file list from directories unless already done so
-        $list = $this->sfiles->copy();
         $crawled = $source->exportGroups();
         foreach( $crawled as $ext => $files ){
             /* @var Loco_fs_File $file */
             foreach( $files as $file ){
-                $name = $file->filename();
                 // skip "{name}.min.{ext}" but only if "{name}.{ext}" exists
+                $name = $file->filename();
                 if( '.min' === substr($name,-4) && file_exists( $file->dirname().'/'.substr($name,0,-4).'.'.$ext ) ){
                     continue;
                 }

@@ -5,6 +5,8 @@
  */
 class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
 
+    private string $error;
+
     /**
      * {@inheritdoc}
      */
@@ -23,8 +25,9 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
     public function init(){
         parent::init();
         $file = $this->get('file');
-        /* @var Loco_fs_File $file */
-        if( $file->exists() && ! $file->isDirectory() ){
+        $this->error = $this->getFileError($file);
+        
+        if( '' === $this->error ){
             $files = new Loco_fs_Siblings($file);
             $files->setDomain( $this->getDomain() );
             // nonce action will be specific to file for extra security
@@ -45,13 +48,13 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
                     break;
                 }
                 $target = new Loco_fs_LocaleFile( $post->dest );
-                $ext = $target->extension();
                 // could be a directory when we wanted the full path to the file
                 if( $target->isDirectory() ){
                     Loco_error_AdminNotices::err('Enter the full path to the .'.$file->extension().' file, not the directory');
                     break;
                 }
                 // primary file extension should only be permitted to change between po and pot
+                $ext = $target->extension();
                 if( $ext !== $file->extension() && 'po' !== $ext && 'pot' !== $ext ){
                     Loco_error_AdminNotices::err('Invalid file extension, .po or .pot only');
                     break;
@@ -82,6 +85,7 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
                 // commit moves. If any fail we'll have separated the files, which is bad
                 $count = 0;
                 $total = count($movable);
+                /* @var Loco_fs_File[][] $movable */
                 foreach( $movable as $pair ){
                     try {
                         $pair[0]->move( $pair[1] );
@@ -127,11 +131,11 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
      * {@inheritdoc}
      */
     public function render(){
-        $file = $this->get('file');
-        if( $fail = $this->getFileError($file) ){
-            return $fail;
+        if( '' !== $this->error ){
+            return $this->error;
         }
         // relocation requires knowing text domain and locale
+        $file = $this->get('file');
         $files = new Loco_fs_Siblings($file);
         try {
             $project = $this->getProject();

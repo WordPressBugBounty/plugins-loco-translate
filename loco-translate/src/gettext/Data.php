@@ -26,6 +26,21 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     }
 
 
+    /**
+     * Validate a Gettext file for access: supported extension and permitted file path
+     * @return string normalized extension, as per self::ext()
+     * @throws Loco_error_Exception
+     */
+    public static function check( Loco_fs_File $file ):string {
+        $ext = self::ext($file);
+        if( ! Loco_fs_Locations::permittedRead( $file->getPath() ) ){
+            // Translators: %s is replaced with the name of a file that cannot be read due to a directory restriction
+            throw new Loco_error_Exception( sprintf( __('Access to %s is disallowed by the plugin settings','loco-translate'), $file->basename() ) );
+        }
+        return $ext;
+    }
+
+
     public static function load( Loco_fs_File $file, ?string $type = null ):self {
         if( is_null($type) ) {
             $type = self::ext($file);
@@ -89,8 +104,11 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
      */
     public static function fromJson( string $json ):self {
         $blob = json_decode( $json, true );
+        if( ! is_array($blob) || ! array_key_exists('locale_data',$blob) || ! is_array($blob['locale_data']) ){
+            throw new Loco_error_ParseException('Invalid Jed format');
+        }
         $p = new LocoJedParser( $blob['locale_data'] );
-        // note that headers outside of locale_data are won't be parsed out. we don't currently need them.
+        // note that headers outside "locale_data" won't be parsed out. we don't currently need them.
         return new Loco_gettext_Data( $p->parse() );
     }
 

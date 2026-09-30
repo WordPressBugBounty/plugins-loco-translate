@@ -109,15 +109,16 @@ $this->extend('../layout');
                 <dt><?php echo $f->escape($label)?>:</dt>
                 <dd><?php 
                     $f->e('path');
-                    if( $f->writable ): echo ' ✓'; else:?> 
-                    <span class="icon icon-warn" title="Not writable directly by PHP"></span><?php
+                    if( $f->writable ): echo ' ✓'; else:?> <span class="icon icon-warn" title="Not writable directly by PHP"></span><?php
                     endif?> 
                 </dd><?php
                 endforeach?> 
                 <dt>PHP open_basedir:</dt>
                 <dd><?php self::e(ini_get('open_basedir'))?></dd>
-                <dt>Loco basedir restriction:</dt>
+                <dt>Loco base directory:</dt>
                 <dd><?php self::e( Loco_fs_Locations::getBaseDirs() )?></dd>
+                <dt>Loco writeable restriction:</dt>
+                <dd><?php self::e( Loco_fs_Locations::getWriteDirs() )?></dd>
             </dl>
         </div>
 

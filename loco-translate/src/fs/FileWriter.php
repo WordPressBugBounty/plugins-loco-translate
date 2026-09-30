@@ -168,6 +168,7 @@ class Loco_fs_FileWriter {
         try {
             // target should have been authorized to create the new file
             $context = clone $dest->getWriteContext();
+            $context->authorize();
             $context->setFile($orig);
             $context->copy($dest);
             // source should have been authorized to delete the original file
@@ -304,9 +305,10 @@ class Loco_fs_FileWriter {
             throw new Loco_error_WriteException( __('Modification of installed files is disallowed by the plugin settings','loco-translate') );
         }
         // Deny writes outside our custom base directories. The current path must be resolvable beneath at least one.
-        $roots = Loco_fs_Locations::getBaseDirs();
-        if( $roots->count() && ! $roots->check( $this->file->getPath() ) ){
-            throw new Loco_error_WriteException( __('File modification disallowed by the plugin settings','loco-translate') );
+        if( ! Loco_fs_Locations::permittedWrite( $this->file->getPath() ) ){
+            $reldir = ( $this->file->isDirectory() ? $this->file : $this->file->getParent() )->getRelativePath( loco_constant('ABSPATH') );
+            // Translators: %s is replaced with a directory path which is denied write access by the plugin settings
+            throw new Loco_error_WriteException( sprintf( __('Write access to %s is disallowed by the plugin settings','loco-translate'), $reldir ) );
         }
         // We may need to examine multiple extensions, or there may be none for directories
         $exts = array_slice( explode('.',strtolower($this->file->basename())), 1 );
