@@ -3,8 +3,8 @@ Contributors: timwhitlock
 Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 6.6
 Requires PHP: 7.4
-Tested up to: 7.1.2
-Stable tag: 2.8.9
+Tested up to: 7.1.4
+Stable tag: 2.8.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,6 +100,11 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 
 
 == Changelog ==
+
+= 2.8.10 =
+* Fixed bug in nonce refresh.
+* Default OpenAI model gpt-4.1-nano -> gpt-5.6-luna. Thanks Lakshya Saini.
+* Bumped WordPress compatibility to 7.1.4
 
 = 2.8.9 =
 * Base directory restriction for all file reads, with a second setting for writes.
@@ -633,7 +638,7 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 
 == Upgrade Notice ==
 
-= 2.8.9 =
+= 2.8.10 =
 * Various improvements and bug fixes
 
 
